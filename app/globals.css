@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { color: #17212B; background: #fff; }
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: #fff; color: #17212B; }
+input, select, textarea { font: inherit; }
+.container-site { @apply mx-auto w-full max-w-7xl px-5 sm:px-8; }
+.eyebrow { @apply text-xs font-bold uppercase tracking-[.18em] text-brand; }
+.section-title { @apply mt-2 font-display text-4xl font-bold uppercase leading-none text-ink sm:text-5xl; }
+.btn-primary { @apply inline-flex min-h-11 items-center justify-center rounded-sm bg-accent px-5 text-sm font-bold text-white transition hover:bg-[#C65320] focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2; }
+.btn-secondary { @apply inline-flex min-h-11 items-center justify-center rounded-sm border border-brand px-5 text-sm font-bold text-brand transition hover:bg-brand hover:text-white focus:outline-none focus:ring-2 focus:ring-brand focus:ring-offset-2; }
+.field { @apply mt-1 w-full rounded-sm border border-slate-300 bg-white px-3 py-3 text-sm text-ink outline-none transition placeholder:text-slate-400 focus:border-brand focus:ring-2 focus:ring-brand/15; }
