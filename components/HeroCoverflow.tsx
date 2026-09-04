@@ -42,7 +42,6 @@ export function HeroCoverflow() {
         </motion.button>;
       })}
     </motion.div>
-    <div className="absolute bottom-4 left-1/2 z-30 flex -translate-x-1/2 gap-2"><button type="button" onClick={() => move(-1)} className="grid h-9 w-9 place-items-center border border-slate-300 bg-white/95 text-lg text-brand shadow-sm transition hover:border-secondary hover:bg-secondary hover:text-white focus:outline-none focus:ring-2 focus:ring-secondary" aria-label="Show previous hero image">←</button><button type="button" onClick={() => move(1)} className="grid h-9 w-9 place-items-center border border-slate-300 bg-white/95 text-lg text-brand shadow-sm transition hover:border-secondary hover:bg-secondary hover:text-white focus:outline-none focus:ring-2 focus:ring-secondary" aria-label="Show next hero image">→</button></div>
     <span className="sr-only" aria-live="polite">Showing {slides[activeIndex].label}, image {activeIndex + 1} of {slides.length}</span>
   </div>;
 }
