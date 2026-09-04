@@ -33,4 +33,4 @@ For extra product-gallery shots, use the same basename plus `-2`, `-3`, etc. For
 
 ## Logo
 
-- [ ] `public/images/brand/logo.svg` — approved Shivaflex logo (the current text mark is a code placeholder)
+- [x] `public/images/brand/logo.jpeg` — approved Shivaflex logo

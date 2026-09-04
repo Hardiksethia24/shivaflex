@@ -5,5 +5,5 @@ export const metadata: Metadata = { title: "Industrial Hose Products", descripti
 
 export default async function ProductsPage({ searchParams }: { searchParams: Promise<{ application?: string }> }) {
   const params = await searchParams;
-  return <main><section className="bg-[#102A3B] py-16 text-white"><div className="container-site"><p className="eyebrow text-blue-200">Product catalogue</p><h1 className="section-title text-white">Hoses selected for the job</h1><p className="mt-5 max-w-2xl leading-7 text-slate-300">Filter by application or construction type, then open a product page for the available specification summary and an RFQ path.</p></div></section><section className="py-16"><div className="container-site"><ProductCatalogue initialApplication={params.application || ""} /></div></section></main>;
+  return <main><section className="border-b border-slate-200 bg-mist py-16"><div className="container-site"><p className="eyebrow">Product catalogue</p><h1 className="section-title">Hoses selected for the job</h1><p className="mt-5 max-w-2xl leading-7 text-slate-600">Filter by application or construction type, then open a product page for the available specification summary and an RFQ path.</p></div></section><section className="py-16"><div className="container-site"><ProductCatalogue initialApplication={params.application || ""} /></div></section></main>;
 }
