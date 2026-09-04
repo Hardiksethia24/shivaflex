@@ -5,6 +5,9 @@ Drop photographs into `public` using these exact filenames. The matching site sl
 ## Homepage / company imagery
 
 - [ ] `public/images/hero/industrial-hose-hero.jpg` — main industrial hose hero shot
+- [ ] `public/images/hero/industrial-hose-hero-2.jpg` — braided flexible hose hero shot
+- [ ] `public/images/hero/industrial-hose-hero-3.jpg` — suction/delivery hose hero shot
+- [ ] `public/images/hero/industrial-hose-hero-4.jpg` — manufacturing or industrial-application hero shot
 - [ ] `public/images/manufacturing/plant-floor.jpg` — manufacturing/plant floor
 - [ ] `public/images/manufacturing/extrusion-line.jpg` — extrusion or braiding line
 - [ ] `public/images/about/team-leadership.jpg` — team or leadership image
