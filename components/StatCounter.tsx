@@ -13,7 +13,7 @@ export function StatCounter({
   label: string;
 }) {
   const ref = useRef(null);
-  const inView = useInView(ref, { once: true, amount: 0.6 });
+  const inView = useInView(ref, { once: true, amount: 0.4 });
   const reduced = useReducedMotion();
   const isNumeric = typeof value === "number";
   const [count, setCount] = useState(isNumeric ? 0 : value);
@@ -35,18 +35,18 @@ export function StatCounter({
   }, [inView, value, reduced, isNumeric]);
 
   return (
-    <div ref={ref} className="border-l-2 border-brand/30 pl-4 sm:pl-6">
+    <div ref={ref} className="border-l-2 border-brand/30 pl-3 sm:pl-5">
       <motion.p
-        initial={{ opacity: 0, y: 8 }}
+        initial={{ opacity: 0, y: 6 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.4 }}
-        className="font-display text-4xl uppercase tracking-tight text-brand sm:text-5xl"
+        transition={{ duration: 0.35 }}
+        className="font-display text-2xl uppercase tracking-tight text-brand sm:text-4xl lg:text-5xl"
       >
         {count}
         {suffix}
       </motion.p>
-      <p className="mt-2 text-sm font-semibold tracking-wide text-slate-700">
+      <p className="mt-0.5 text-xs font-semibold tracking-wide text-slate-700 sm:mt-1.5 sm:text-sm">
         {label}
       </p>
     </div>

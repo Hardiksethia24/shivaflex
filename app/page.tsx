@@ -54,7 +54,7 @@ export default function Home() {
 
       {/* Trust Bar */}
       <section className="border-b border-slate-200 bg-mist">
-        <div className="container-site grid gap-8 py-10 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="container-site grid grid-cols-2 gap-x-4 gap-y-4 py-4 sm:gap-6 sm:py-8 lg:grid-cols-4">
           <StatCounter value={25} suffix="+" label="Years in Operation" />
           <StatCounter value={3} label="Manufacturing Units" />
           <StatCounter value={17} suffix="+" label="Product Lines" />
