@@ -56,7 +56,7 @@ export function TiltedCarousel() {
                 initial={false}
                 animate={{
                   x: `${delta * 68}%`,
-                  rotateY: -delta * 40,
+                  rotateY: -delta * 62,
                   scale: isActive ? 1 : 0.82,
                   opacity: isActive ? 1 : isVisible ? 0.6 : 0,
                   zIndex: isActive ? 20 : 10,
