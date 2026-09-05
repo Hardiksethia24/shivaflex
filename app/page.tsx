@@ -21,20 +21,26 @@ export default function Home() {
     <main>
       {/* Hero Section */}
       <section className="overflow-hidden border-b border-slate-200 bg-white">
-        <div className="container-site grid min-h-[530px] items-center gap-12 py-20 lg:grid-cols-[1.05fr_.95fr] lg:py-28">
+        <div className="container-site grid min-h-[530px] items-center gap-12 py-16 lg:grid-cols-[1.05fr_.95fr] lg:py-24">
           <Reveal>
             <p className="eyebrow">Shivom Rubber Products (P) Ltd.</p>
-            <h1 className="mt-4 max-w-3xl font-display text-5xl uppercase leading-[.95] tracking-tight text-ink sm:text-7xl">
-              Ready to Challenge <span className="text-brand">— Flexibility 'N' Strength</span>
+            <h1 className="mt-4 max-w-3xl font-display text-5xl font-black uppercase leading-[0.92] tracking-tight text-black sm:text-6xl lg:text-7xl">
+              Ready to Challenge — Flexibility 'N' Strength
             </h1>
-            <p className="mt-7 max-w-xl text-lg leading-8 text-slate-600">
+            <p className="mt-6 max-w-xl text-lg leading-relaxed text-slate-700">
               Specification-led PVC and braided hose, manufactured in India since 1999 — built for agriculture, construction, industry, and infrastructure.
             </p>
-            <div className="mt-9 flex flex-wrap gap-3">
-              <Link href="/contact#rfq" className="btn-primary">
+            <div className="mt-8 flex flex-wrap items-center gap-4">
+              <Link
+                href="/contact#rfq"
+                className="inline-flex min-h-[46px] items-center justify-center rounded-full bg-orange-500 px-7 text-sm font-bold text-white shadow-sm transition duration-150 hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 sm:text-base"
+              >
                 Request a Quote
               </Link>
-              <Link href="/products" className="btn-secondary">
+              <Link
+                href="/products"
+                className="inline-flex min-h-[46px] items-center justify-center rounded-full border-2 border-slate-300 bg-white px-7 text-sm font-bold text-slate-800 shadow-sm transition duration-150 hover:border-slate-800 hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 sm:text-base"
+              >
                 Browse Products
               </Link>
             </div>
