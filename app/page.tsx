@@ -5,6 +5,7 @@ import { ProductCard } from "@/components/ProductCard";
 import { ProductImage } from "@/components/ProductImage";
 import { Reveal } from "@/components/Reveal";
 import { StatCounter } from "@/components/StatCounter";
+import { TiltedCarousel } from "@/components/TiltedCarousel";
 import { applicationDetails, products } from "@/lib/products";
 
 export default function Home() {
@@ -19,15 +20,15 @@ export default function Home() {
 
   return (
     <main>
-      {/* Hero Section */}
+      {/* 1. Hero Section */}
       <section className="overflow-hidden border-b border-slate-200 bg-white">
-        <div className="container-site grid min-h-[530px] items-center gap-12 py-16 lg:grid-cols-[1.05fr_.95fr] lg:py-24">
+        <div className="container-site grid min-h-[500px] items-center gap-12 py-14 lg:grid-cols-[1.05fr_.95fr] lg:py-20">
           <Reveal>
             <p className="eyebrow">Shivom Rubber Products (P) Ltd.</p>
-            <h1 className="mt-4 max-w-3xl font-display text-5xl font-black uppercase leading-[0.92] tracking-tight text-black sm:text-6xl lg:text-7xl">
+            <h1 className="mt-4 max-w-3xl font-display text-3xl font-bold uppercase leading-tight tracking-tight text-black sm:text-4xl lg:text-5xl">
               Ready to Challenge — Flexibility 'N' Strength
             </h1>
-            <p className="mt-6 max-w-xl text-lg leading-relaxed text-slate-700">
+            <p className="mt-5 max-w-xl text-base sm:text-lg leading-relaxed text-slate-700">
               Specification-led PVC and braided hose, manufactured in India since 1999 — built for agriculture, construction, industry, and infrastructure.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-4">
@@ -61,8 +62,39 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Shop by Application Section */}
-      <section className="border-b border-slate-200 bg-white py-24">
+      {/* 2. New About Us Section (Homepage Teaser) */}
+      <section className="border-b border-slate-200 bg-white py-20">
+        <div className="container-site">
+          <div className="mx-auto max-w-3xl text-center">
+            <Reveal>
+              <p className="eyebrow">About Us</p>
+              <h2 className="section-title">
+                25+ Years of Manufacturing Flexible Hose
+              </h2>
+              <p className="mt-5 text-base sm:text-lg leading-relaxed text-slate-700">
+                Since 1999, Shivom Rubber Products (P) Ltd. has been manufacturing PVC and braided hose from three facilities across Rajasthan and West Bengal, under the Shivaflex brand. Every batch runs through our own high-tensile and pressure-testing equipment before it leaves the plant — built to spec, not just built to sell.
+              </p>
+              <div className="mt-6">
+                <Link
+                  href="/about-quality"
+                  className="inline-flex items-center gap-1.5 font-bold text-orange-600 transition hover:text-orange-700 hover:underline"
+                >
+                  Learn more about us <span aria-hidden="true">→</span>
+                </Link>
+              </div>
+            </Reveal>
+          </div>
+
+          <div className="mt-8">
+            <Reveal delay={0.15}>
+              <TiltedCarousel />
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
+      {/* 3. Shop by Application Section (Moved below About Us) */}
+      <section className="border-b border-slate-200 bg-mist py-24">
         <div className="container-site">
           <Reveal>
             <p className="eyebrow">Shop by Application</p>
@@ -85,7 +117,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Featured Product Families Section */}
+      {/* 4. Featured Product Families Section */}
       <section className="border-b border-slate-200 bg-[#F0F5FC] py-24">
         <div className="container-site">
           <Reveal>
@@ -109,7 +141,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Manufacturing & Quality Strip */}
+      {/* 5. Manufacturing & Quality Strip */}
       <section className="border-b border-slate-200 bg-white py-24">
         <div className="container-site grid items-center gap-12 lg:grid-cols-2">
           <Reveal>
@@ -135,7 +167,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Dealer Callout Banner */}
+      {/* 6. Dealer Callout Banner */}
       <section className="border-b border-slate-200 bg-mist py-20">
         <div className="container-site flex flex-col items-start justify-between gap-8 md:flex-row md:items-center">
           <div className="max-w-3xl">

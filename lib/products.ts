@@ -71,6 +71,41 @@ export const productFamilies = [
 // Master product and photography-shot list. Keep client [TODO] markers intact.
 export const products: Product[] = [
   {
+    slug: "suction-hose",
+    name: "Suction Hose",
+    family: "Suction Hose",
+    applications: ["Agriculture & Irrigation", "Construction", "Mining & Quarry"],
+    image: "/images/products/medium-duty-green-hose.jpg",
+    short: "Rigid enough to hold shape under vacuum, flexible enough to route anywhere.",
+    features: [
+      "Rigid spiral reinforcement to prevent vacuum collapse",
+      "Flexible routing for demanding field and plant installations",
+      "Smooth inner bore for optimum fluid flow",
+      "Resistant to light chemicals, weather, and abrasion",
+    ],
+    sizes: "20 mm–200 mm I.D.",
+    workingPressure: "2.5–7 kg/cm²",
+    burstingPressure: "6–25 kg/cm²",
+    exactSpecs: true,
+  },
+  {
+    slug: "braided-hose",
+    name: "Braided Hose",
+    family: "Braided Hose",
+    applications: ["Construction", "Automotive & Car Wash", "Agriculture & Irrigation"],
+    image: "/images/products/water-hose.jpg",
+    short: "Reinforced construction across air, water, welding, and car-wash applications.",
+    features: [
+      "High-tensile synthetic yarn braiding",
+      "Flexible routing with superior kink resistance",
+      "Weather and abrasion resistant outer cover",
+      "Engineered for consistent pressure handling",
+    ],
+    sizes: "[TODO: confirm sizes]",
+    workingPressure: "[TODO: confirm pressure]",
+    burstingPressure: "[TODO: confirm pressure]",
+  },
+  {
     slug: "medium-duty-green-hose",
     name: "Medium Duty (Green) Suction Hose",
     family: "Suction Hose",
