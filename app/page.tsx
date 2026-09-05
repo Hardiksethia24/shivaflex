@@ -103,7 +103,7 @@ export default function Home() {
               Find the right hose by what you're using it for — not just by name.
             </p>
           </Reveal>
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-8 grid grid-cols-2 gap-3 sm:mt-12 sm:gap-6 lg:grid-cols-3">
             {applicationDetails.map((item, index) => (
               <Reveal key={item.name} delay={index * 0.06}>
                 <ApplicationTile
@@ -126,7 +126,7 @@ export default function Home() {
               Built to spec, tested for pressure, engineered to last.
             </h2>
           </Reveal>
-          <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-8 grid grid-cols-2 gap-3 sm:mt-10 sm:gap-6 md:grid-cols-2 lg:grid-cols-4">
             {featured.map((product, index) => (
               <Reveal key={product.slug} delay={index * 0.08}>
                 <ProductCard product={product} />
