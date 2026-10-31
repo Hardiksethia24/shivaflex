@@ -11,10 +11,10 @@ import { applicationDetails, products } from "@/lib/products";
 export default function Home() {
   const featured = products.filter((p) =>
     [
-      "medium-duty-green-hose",
-      "transparent-pneumatic-hose",
-      "delivery-hose-pipe",
-      "flex-duct-hose",
+      "garden-pipe",
+      "suction-pipe",
+      "braided-hose",
+      "thunder-steel-wire-hose",
     ].includes(p.slug)
   );
 
@@ -57,12 +57,12 @@ export default function Home() {
         <div className="container-site grid grid-cols-2 gap-x-4 gap-y-4 py-4 sm:gap-6 sm:py-8 lg:grid-cols-4">
           <StatCounter value={25} suffix="+" label="Years in Operation" />
           <StatCounter value={3} label="Manufacturing Units" />
-          <StatCounter value={17} suffix="+" label="Product Lines" />
+          <StatCounter value={11} label="Product Families" />
           <StatCounter value="Pan-India" label="Supply" />
         </div>
       </section>
 
-      {/* 2. New About Us Section (Homepage Teaser) */}
+      {/* 2. About Us Section (Homepage Teaser) */}
       <section className="border-b border-slate-200 bg-white py-20">
         <div className="container-site">
           <div className="mx-auto max-w-3xl text-center">
@@ -93,7 +93,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 3. Shop by Application Section (Moved below About Us) */}
+      {/* 3. Shop by Application Section */}
       <section className="border-b border-slate-200 bg-mist py-24">
         <div className="container-site">
           <Reveal>
@@ -103,7 +103,7 @@ export default function Home() {
               Find the right hose by what you're using it for — not just by name.
             </p>
           </Reveal>
-          <div className="mt-8 grid grid-cols-2 gap-3 sm:mt-12 sm:gap-6 lg:grid-cols-3">
+          <div className="mt-8 grid grid-cols-2 gap-3 sm:mt-12 sm:gap-6 lg:grid-cols-4">
             {applicationDetails.map((item, index) => (
               <Reveal key={item.name} delay={index * 0.06}>
                 <ApplicationTile
@@ -135,7 +135,7 @@ export default function Home() {
           </div>
           <div className="mt-10">
             <Link href="/products" className="btn-secondary">
-              Browse Products
+              Browse All 11 Families
             </Link>
           </div>
         </div>

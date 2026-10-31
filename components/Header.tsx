@@ -4,27 +4,87 @@ import Link from "next/link";
 import { useState, useRef } from "react";
 import { Logo } from "./Logo";
 
-const productDropdownItems = [
-  { name: "Suction Hose", href: "/products/suction-hose" },
-  { name: "Medium Duty Green", href: "/products/medium-duty-green-hose" },
-  { name: "Heavy Duty Hose", href: "/products/heavy-duty-hose" },
-  { name: "Flex Duct Hose", href: "/products/flex-duct-hose" },
-  { name: "Braided Hose", href: "/products/braided-hose" },
-  { name: "Transparent & Pneumatic Hose", href: "/products/transparent-pneumatic-hose" },
-  { name: "Water / Garden / Construction Water Hose", href: "/products/water-hose" },
-  { name: "Welding Hose", href: "/products/welding-hose" },
-  { name: "Spray Hose", href: "/products/super-spray-hose" },
-  { name: "Power Spray Hose", href: "/products/power-spray-hose" },
-  { name: "Car Washing Hose", href: "/products/car-washing-hose" },
-  { name: "Car Washing Power Hose", href: "/products/car-washing-power-hose" },
-  { name: "Rock Drill Hose", href: "/products/rock-drill-hose" },
-  { name: "Delivery Hose Pipe", href: "/products/delivery-hose-pipe" },
+type NavFamily = {
+  name: string;
+  href: string;
+  variants?: { name: string; href: string }[];
+};
+
+const productFamiliesNav: NavFamily[] = [
+  {
+    name: "Garden Pipe",
+    href: "/products/garden-pipe",
+    variants: [
+      { name: "Transparent", href: "/products/garden-pipe?variant=transparent" },
+      { name: "Garden Foam", href: "/products/garden-pipe?variant=garden-foam" },
+      { name: "Transparent Zebra", href: "/products/garden-pipe?variant=transparent-zebra" },
+      { name: "Shiva Gold", href: "/products/garden-pipe?variant=shiva-gold" },
+      { name: "Nylon", href: "/products/garden-pipe?variant=nylon" },
+    ],
+  },
+  {
+    name: "Power Spray Hose",
+    href: "/products/power-spray-hose",
+  },
+  {
+    name: "Braided Hose",
+    href: "/products/braided-hose",
+    variants: [
+      { name: "8mm Braided", href: "/products/braided-hose?variant=8mm-braided" },
+      { name: "Coloured Braided", href: "/products/braided-hose?variant=coloured-braided" },
+      { name: "Water Braided", href: "/products/braided-hose?variant=water-braided" },
+      { name: "Braided AC Drainage", href: "/products/braided-hose?variant=braided-ac-drainage" },
+    ],
+  },
+  {
+    name: "Delivery Pipe",
+    href: "/products/delivery-pipe",
+  },
+  {
+    name: "25 mm Pneumatic Hose",
+    href: "/products/25mm-pneumatic-hose",
+  },
+  {
+    name: "Suction Pipe",
+    href: "/products/suction-pipe",
+    variants: [
+      { name: "Type 1", href: "/products/suction-pipe?variant=type-1" },
+      { name: "Type 2", href: "/products/suction-pipe?variant=type-2" },
+      { name: "Type 3", href: "/products/suction-pipe?variant=type-3" },
+    ],
+  },
+  {
+    name: "Super Car Washing Hose",
+    href: "/products/super-car-washing-hose",
+    variants: [
+      { name: "10mm", href: "/products/super-car-washing-hose?variant=10mm" },
+      { name: "12mm", href: "/products/super-car-washing-hose?variant=12mm" },
+    ],
+  },
+  {
+    name: "Thunder Steel Wire Hose",
+    href: "/products/thunder-steel-wire-hose",
+  },
+  {
+    name: "Duct Hose",
+    href: "/products/duct-hose",
+  },
+  {
+    name: "5 Layer Hose",
+    href: "/products/5-layer-hose",
+  },
+  {
+    name: "Rock Drill Hose",
+    href: "/products/rock-drill-hose",
+  },
 ];
 
 export function Header() {
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [mobileProductsOpen, setMobileProductsOpen] = useState(false);
+  const [expandedMobileFamilies, setExpandedMobileFamilies] = useState<Record<string, boolean>>({});
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [hoveredFamily, setHoveredFamily] = useState<string | null>(null);
   const closeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const handleMouseEnter = () => {
@@ -38,7 +98,15 @@ export function Header() {
   const handleMouseLeave = () => {
     closeTimeoutRef.current = setTimeout(() => {
       setDropdownOpen(false);
+      setHoveredFamily(null);
     }, 150);
+  };
+
+  const toggleMobileFamily = (familyName: string) => {
+    setExpandedMobileFamilies((prev) => ({
+      ...prev,
+      [familyName]: !prev[familyName],
+    }));
   };
 
   return (
@@ -72,7 +140,7 @@ export function Header() {
           <Logo />
 
           <nav className="hidden items-center gap-8 lg:flex" aria-label="Primary navigation">
-            {/* Products with Hover Dropdown */}
+            {/* Products with Hover Dropdown and Flyout Variants */}
             <div
               className="relative"
               onMouseEnter={handleMouseEnter}
@@ -80,7 +148,7 @@ export function Header() {
             >
               <Link
                 href="/products"
-                className="flex items-center gap-1.5 text-sm font-bold tracking-wide text-slate-700 transition hover:text-orange-600 py-2"
+                className="flex items-center gap-1.5 py-2 text-sm font-bold tracking-wide text-slate-700 transition hover:text-orange-600"
               >
                 Products
                 <svg
@@ -97,36 +165,75 @@ export function Header() {
 
               {/* Dropdown Menu */}
               {dropdownOpen && (
-                <div className="absolute left-0 top-full pt-2 w-[600px]">
-                  <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-2xl ring-1 ring-black/5">
-                    <div className="mb-2.5 flex items-center justify-between border-b border-slate-100 pb-2.5">
-                      <span className="text-xs font-bold uppercase tracking-wider text-slate-400">
-                        Individual Product Lines
+                <div className="absolute left-0 top-full pt-2 w-[340px]">
+                  <div className="rounded-xl border border-slate-200 bg-white p-3 shadow-2xl ring-1 ring-black/5">
+                    <div className="mb-2 flex items-center justify-between border-b border-slate-100 px-2 pb-2">
+                      <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
+                        11 Product Families
                       </span>
                       <Link
                         href="/products"
                         onClick={() => setDropdownOpen(false)}
                         className="text-xs font-bold text-orange-600 hover:text-orange-700 hover:underline"
                       >
-                        Browse all 17 lines →
+                        Browse all families →
                       </Link>
                     </div>
-                    <div className="grid grid-cols-2 gap-x-3 gap-y-1">
-                      {productDropdownItems.map((item) => (
-                        <Link
-                          key={item.name}
-                          href={item.href}
-                          onClick={() => setDropdownOpen(false)}
-                          className="group flex items-center justify-between rounded-md px-3 py-2 text-sm text-slate-700 transition hover:bg-orange-50 hover:text-orange-700"
-                        >
-                          <span className="font-medium group-hover:font-semibold">
-                            {item.name}
-                          </span>
-                          <span className="text-xs text-slate-300 group-hover:text-orange-500">
-                            →
-                          </span>
-                        </Link>
-                      ))}
+
+                    <div className="space-y-0.5">
+                      {productFamiliesNav.map((family) => {
+                        const hasVariants = Boolean(family.variants && family.variants.length > 0);
+                        const isHovered = hoveredFamily === family.name;
+
+                        return (
+                          <div
+                            key={family.name}
+                            className="relative"
+                            onMouseEnter={() => setHoveredFamily(family.name)}
+                          >
+                            <div className="group flex items-center justify-between rounded-md px-3 py-2 text-sm text-slate-700 transition hover:bg-orange-50 hover:text-orange-700">
+                              <Link
+                                href={family.href}
+                                onClick={() => setDropdownOpen(false)}
+                                className="flex-1 font-medium group-hover:font-semibold"
+                              >
+                                {family.name}
+                              </Link>
+                              {hasVariants && (
+                                <span className="ml-2 flex items-center gap-1 text-[11px] font-semibold text-slate-400 group-hover:text-orange-600">
+                                  <span>{family.variants!.length}</span>
+                                  <span className="text-xs">›</span>
+                                </span>
+                              )}
+                            </div>
+
+                            {/* Flyout Submenu for Variants */}
+                            {hasVariants && isHovered && (
+                              <div
+                                className="absolute left-full top-0 ml-1.5 w-[230px] rounded-xl border border-slate-200 bg-white p-2.5 shadow-2xl ring-1 ring-black/5"
+                                onMouseEnter={() => setHoveredFamily(family.name)}
+                              >
+                                <div className="mb-1.5 border-b border-slate-100 px-2 pb-1 text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                                  {family.name} Variants
+                                </div>
+                                <div className="space-y-0.5">
+                                  {family.variants!.map((v) => (
+                                    <Link
+                                      key={v.name}
+                                      href={v.href}
+                                      onClick={() => setDropdownOpen(false)}
+                                      className="flex items-center justify-between rounded px-2.5 py-1.5 text-xs text-slate-700 transition hover:bg-orange-50 hover:text-orange-700"
+                                    >
+                                      <span className="font-medium">{v.name}</span>
+                                      <span className="text-slate-300">→</span>
+                                    </Link>
+                                  ))}
+                                </div>
+                              </div>
+                            )}
+                          </div>
+                        );
+                      })}
                     </div>
                   </div>
                 </div>
@@ -181,7 +288,7 @@ export function Header() {
                   onClick={() => setMobileProductsOpen(!mobileProductsOpen)}
                   className="flex w-full items-center justify-between rounded-lg px-3 py-3 font-semibold text-slate-800 hover:bg-mist"
                 >
-                  <span>Products</span>
+                  <span>Products (11 Families)</span>
                   <span className="text-xs text-slate-500">
                     {mobileProductsOpen ? "▲" : "▼"}
                   </span>
@@ -193,18 +300,50 @@ export function Header() {
                       className="block py-1.5 text-sm font-bold text-orange-600 hover:underline"
                       href="/products"
                     >
-                      All Products Overview →
+                      All 11 Families Overview →
                     </Link>
-                    {productDropdownItems.map((item) => (
-                      <Link
-                        key={item.name}
-                        onClick={() => setMobileNavOpen(false)}
-                        className="block py-1.5 text-sm text-slate-700 hover:text-orange-600"
-                        href={item.href}
-                      >
-                        {item.name}
-                      </Link>
-                    ))}
+                    {productFamiliesNav.map((family) => {
+                      const hasVariants = Boolean(family.variants && family.variants.length > 0);
+                      const isExpanded = Boolean(expandedMobileFamilies[family.name]);
+
+                      return (
+                        <div key={family.name} className="py-1">
+                          <div className="flex items-center justify-between">
+                            <Link
+                              onClick={() => setMobileNavOpen(false)}
+                              className="text-sm font-medium text-slate-700 hover:text-orange-600"
+                              href={family.href}
+                            >
+                              {family.name}
+                            </Link>
+                            {hasVariants && (
+                              <button
+                                type="button"
+                                onClick={() => toggleMobileFamily(family.name)}
+                                className="px-2 py-0.5 text-xs text-slate-400 hover:text-orange-600"
+                                aria-label={`Toggle ${family.name} variants`}
+                              >
+                                {isExpanded ? "▲" : "▼"}
+                              </button>
+                            )}
+                          </div>
+                          {hasVariants && isExpanded && (
+                            <div className="ml-3 mt-1 space-y-1 border-l border-slate-200 pl-2">
+                              {family.variants!.map((v) => (
+                                <Link
+                                  key={v.name}
+                                  onClick={() => setMobileNavOpen(false)}
+                                  className="block py-1 text-xs text-slate-600 hover:text-orange-600"
+                                  href={v.href}
+                                >
+                                  • {v.name}
+                                </Link>
+                              ))}
+                            </div>
+                          )}
+                        </div>
+                      );
+                    })}
                   </div>
                 )}
               </div>

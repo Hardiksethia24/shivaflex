@@ -12,27 +12,56 @@ Drop photographs into `public` using these exact filenames. The matching site sl
 - [ ] `public/images/manufacturing/extrusion-line.jpg` — extrusion or braiding line
 - [ ] `public/images/about/team-leadership.jpg` — team or leadership image
 
-## Product images
+## Product images (11 families)
 
-- [ ] `public/images/products/medium-duty-green-hose.jpg`
-- [ ] `public/images/products/heavy-duty-hose.jpg`
-- [ ] `public/images/products/flex-duct-hose.jpg`
-- [ ] `public/images/products/transparent-pneumatic-hose.jpg`
-- [ ] `public/images/products/water-hose.jpg`
-- [ ] `public/images/products/garden-hose.jpg`
-- [ ] `public/images/products/construction-water-hose.jpg`
-- [ ] `public/images/products/welding-hose.jpg`
-- [ ] `public/images/products/super-spray-hose.jpg`
-- [ ] `public/images/products/car-washing-power-hose.jpg`
-- [ ] `public/images/products/five-layer-hose.jpg`
-- [ ] `public/images/products/delivery-hose-pipe.jpg`
-- [ ] `public/images/products/power-spray-hose.jpg`
-- [ ] `public/images/products/rock-drill-hose.jpg`
-- [ ] `public/images/products/car-washing-hose.jpg`
-- [ ] `public/images/products/thunder-hose.jpg`
-- [ ] `public/images/products/garden-tubing.jpg`
+### 1. Garden Pipe
+- [x] `public/images/products/garden-pipe.jpg` — family cover image
+- [x] `public/images/products/garden-pipe-transparent.jpg` — Transparent variant
+- [ ] `public/images/products/garden-pipe-garden-foam.jpg` — Garden Foam variant
+- [x] `public/images/products/garden-pipe-transparent-zebra.jpg` — Transparent Zebra variant
+- [x] `public/images/products/garden-pipe-shiva-gold.jpg` — Shiva Gold variant
+- [x] `public/images/products/garden-pipe-nylon.jpg` — Nylon variant
 
-For extra product-gallery shots, use the same basename plus `-2`, `-3`, etc. For example: `public/images/products/heavy-duty-hose-2.jpg`.
+### 2. Power Spray Hose
+- [x] `public/images/products/power-spray-hose.jpg` — single product
+
+### 3. Braided Hose
+- [x] `public/images/products/braided-hose.jpg` — family cover image
+- [x] `public/images/products/braided-hose-8mm-braided.jpg` — 8mm Braided variant
+- [x] `public/images/products/braided-hose-coloured-braided.jpg` — Coloured Braided variant
+- [x] `public/images/products/braided-hose-water-braided.jpg` — Water Braided variant
+- [ ] `public/images/products/braided-hose-braided-ac-drainage.jpg` — Braided AC Drainage variant
+
+### 4. Delivery Pipe
+- [x] `public/images/products/delivery-pipe.jpg` — single product
+
+### 5. 25 mm Pneumatic Hose
+- [x] `public/images/products/25mm-pneumatic-hose.jpg` — single product
+
+### 6. Suction Pipe
+- [x] `public/images/products/suction-pipe.jpg` — family cover image
+- [x] `public/images/products/suction-pipe-type-1.jpg` — Type 1 variant
+- [x] `public/images/products/suction-pipe-type-2.jpg` — Type 2 variant
+- [x] `public/images/products/suction-pipe-type-3.jpg` — Type 3 variant
+
+### 7. Super Car Washing Hose
+- [x] `public/images/products/super-car-washing-hose.jpg` — family cover image
+- [x] `public/images/products/super-car-washing-hose-10mm.jpg` — 10mm size variant
+- [x] `public/images/products/super-car-washing-hose-12mm.jpg` — 12mm size variant
+
+### 8. Thunder Steel Wire Hose
+- [x] `public/images/products/thunder-steel-wire-hose.jpg` — single product
+
+### 9. Duct Hose
+- [x] `public/images/products/duct-hose.jpg` — single product
+
+### 10. 5 Layer Hose
+- [ ] `public/images/products/5-layer-hose.jpg` — single product
+
+### 11. Rock Drill Hose
+- [ ] `public/images/products/rock-drill-hose.jpg` — single product
+
+For extra product-gallery shots, use the same basename plus `-2`, `-3`, etc. For example: `public/images/products/thunder-steel-wire-hose-2.jpg`.
 
 ## Logo
 
