@@ -13,11 +13,11 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: "Shivaflex | Ready to Challenge — Flexibility 'N' Strength",
+    default: "Shivaflex | Pipes That Build a Stronger Future — PVC & Braided Hose India",
     template: "%s | Shivaflex",
   },
   description:
-    "PVC and braided hose manufacturer, operating since 1999. Serving agriculture, construction, industry, and infrastructure across India.",
+    "Leading PVC and braided hose manufacturer in India, operating since 1999. High-performance industrial piping for agriculture, construction, and infrastructure.",
   keywords: [
     "PVC hose manufacturer India",
     "braided hose",

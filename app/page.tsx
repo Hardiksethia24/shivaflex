@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { ApplicationTile } from "@/components/ApplicationTile";
 import { HeroCoverflow } from "@/components/HeroCoverflow";
@@ -7,6 +8,12 @@ import { Reveal } from "@/components/Reveal";
 import { StatCounter } from "@/components/StatCounter";
 import { TiltedCarousel } from "@/components/TiltedCarousel";
 import { applicationDetails, products } from "@/lib/products";
+
+export const metadata: Metadata = {
+  title: "Pipes That Build a Stronger Future | Shivaflex — PVC & Braided Hose Manufacturer India",
+  description:
+    "Shivom Rubber Products (P) Ltd. manufactures high-performance PVC and braided hose in India since 1999. Engineered for agriculture, construction, and infrastructure.",
+};
 
 export default function Home() {
   const featured = products.filter((p) =>
@@ -26,7 +33,7 @@ export default function Home() {
           <Reveal>
             <p className="eyebrow">Shivom Rubber Products (P) Ltd.</p>
             <h1 className="mt-4 max-w-3xl font-display text-3xl font-bold uppercase leading-tight tracking-tight text-black sm:text-4xl lg:text-5xl">
-              Ready to Challenge — Flexibility 'N' Strength
+              PIPES THAT BUILD A STRONGER FUTURE
             </h1>
             <p className="mt-5 max-w-xl text-base sm:text-lg leading-relaxed text-slate-700">
               Specification-led PVC and braided hose, manufactured in India since 1999 — built for agriculture, construction, industry, and infrastructure.
