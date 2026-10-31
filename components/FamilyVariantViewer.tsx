@@ -23,13 +23,53 @@ export function FamilyVariantViewer({ family }: { family: Product }) {
   const initialIndex = variants.findIndex((v) => v.slug === initialSlug);
   const [selectedIndex, setSelectedIndex] = useState(initialIndex >= 0 ? initialIndex : 0);
 
+  // Sync state when user navigates with browser Back / Forward buttons (popstate)
   useEffect(() => {
-    const slug = mapVariantSlug(searchParams.get("variant"));
+    const handlePopState = () => {
+      const params = new URLSearchParams(window.location.search);
+      const slug = mapVariantSlug(params.get("variant"));
+      if (slug) {
+        const idx = variants.findIndex((v) => v.slug === slug);
+        if (idx >= 0) {
+          setSelectedIndex(idx);
+          return;
+        }
+      }
+      setSelectedIndex(0);
+    };
+
+    window.addEventListener("popstate", handlePopState);
+    return () => {
+      window.removeEventListener("popstate", handlePopState);
+    };
+  }, [variants]);
+
+  // Sync state if Next.js router navigates (e.g. from Header dropdown links)
+  useEffect(() => {
+    const params = new URLSearchParams(typeof window !== "undefined" ? window.location.search : "");
+    const slug = mapVariantSlug(params.get("variant") || searchParams.get("variant"));
     if (slug) {
       const idx = variants.findIndex((v) => v.slug === slug);
-      if (idx >= 0) setSelectedIndex(idx);
+      if (idx >= 0) {
+        setSelectedIndex(idx);
+        return;
+      }
+    } else {
+      setSelectedIndex(0);
     }
   }, [searchParams, variants]);
+
+  const handleSelectVariant = (index: number) => {
+    setSelectedIndex(index);
+    const variant = variants[index];
+    if (variant && typeof window !== "undefined") {
+      const currentUrl = new URL(window.location.href);
+      if (currentUrl.searchParams.get("variant") !== variant.slug) {
+        currentUrl.searchParams.set("variant", variant.slug);
+        window.history.pushState({ variant: variant.slug }, "", currentUrl.toString());
+      }
+    }
+  };
 
   const activeVariant: ProductVariant | undefined = variants[selectedIndex] || variants[0];
   if (!activeVariant) return null;
@@ -67,7 +107,7 @@ export function FamilyVariantViewer({ family }: { family: Product }) {
               <button
                 key={variant.slug}
                 type="button"
-                onClick={() => setSelectedIndex(index)}
+                onClick={() => handleSelectVariant(index)}
                 className={`group relative flex flex-col items-start rounded-lg border p-3.5 text-left transition duration-150 ${
                   isSelected
                     ? "border-orange-500 bg-orange-50/50 shadow-sm ring-2 ring-orange-500/20"
@@ -112,6 +152,7 @@ export function FamilyVariantViewer({ family }: { family: Product }) {
           <div>
             <div className="relative aspect-[16/11] overflow-hidden rounded-lg border border-slate-200 bg-slate-100 shadow-inner">
               <ProductImage
+                key={activeVariant.image}
                 src={activeVariant.image}
                 alt={`${family.name} — ${activeVariant.name} variant coil, flexible PVC`}
                 className="transition duration-300 hover:scale-102"
