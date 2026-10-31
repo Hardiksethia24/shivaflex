@@ -334,13 +334,25 @@ export const products: Product[] = [
     image: "/images/products/super-car-washing-hose.jpg",
     short: "Commercial-grade high-pressure washing hose engineered specifically for service bays and detailing centers.",
     features: [
-      "Available in 10 mm and 12 mm sizes for commercial pressure-washer equipment",
+      "Available in 8 mm, 10 mm and 12 mm sizes for commercial pressure-washer equipment",
       "Reinforced high-tensile braided construction designed for continuous pressure cycles",
       "Abrasion-resistant outer jacket withstands continuous dragging across concrete wash floors",
       "Superior kink resistance ensures uninterrupted water delivery during active vehicle washing",
     ],
     variantLabel: "Sizes",
     variants: [
+      {
+        slug: "8mm",
+        name: "8mm",
+        image: "/images/products/super-car-washing-hose-8mm.jpg",
+        short: "8 mm internal bore high-pressure car washing hose for compact detailing setups.",
+        features: [
+          "8 mm internal diameter for concentrated high-pressure water delivery",
+          "Ultra-flexible and lightweight for agile handling around vehicles",
+          "Braided reinforcement withstands continuous pressure cycles",
+        ],
+        sizes: "8 mm",
+      },
       {
         slug: "10mm",
         name: "10mm",
@@ -352,8 +364,6 @@ export const products: Product[] = [
           "Heavy braided reinforcement for commercial wash pumps",
         ],
         sizes: "10 mm",
-        workingPressure: "[TODO: confirm spec]",
-        burstingPressure: "[TODO: confirm spec]",
       },
       {
         slug: "12mm",
@@ -366,8 +376,6 @@ export const products: Product[] = [
           "Enhanced outer wear layer against hot wash water and cleaning detergents",
         ],
         sizes: "12 mm",
-        workingPressure: "[TODO: confirm spec]",
-        burstingPressure: "[TODO: confirm spec]",
       },
     ],
   },

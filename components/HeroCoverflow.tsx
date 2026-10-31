@@ -5,10 +5,10 @@ import { useCallback, useEffect, useState } from "react";
 import { ProductImage } from "./ProductImage";
 
 const slides = [
-  { src: "/images/hero/industrial-hose-hero.jpg", alt: "Shivaflex industrial PVC hose range", label: "Industrial hose solutions" },
-  { src: "/images/hero/industrial-hose-hero-2.jpg", alt: "Braided flexible hose product range", label: "Braided flexible hose" },
-  { src: "/images/hero/industrial-hose-hero-3.jpg", alt: "Suction hose coil for agricultural use", label: "Suction & delivery hose" },
-  { src: "/images/hero/industrial-hose-hero-4.jpg", alt: "Shivaflex hose manufacturing application", label: "Built for Indian industry" },
+  { src: "/images/hero/industrial-hose-hero.jpg", alt: "Shivaflex complete industrial PVC and braided hose range showcase", label: "Industrial hose solutions" },
+  { src: "/images/hero/industrial-hose-hero-2.jpg", alt: "Coloured braided flexible hose coils with high-tensile reinforcement", label: "Braided flexible hose" },
+  { src: "/images/hero/industrial-hose-hero-3.jpg", alt: "Medium duty green suction pipe coil for agricultural and dewatering use", label: "Suction & delivery hose" },
+  { src: "/images/hero/industrial-hose-hero-4.jpg", alt: "Thunder steel wire reinforced hose coil for heavy industrial vacuum", label: "Built for Indian industry" },
 ];
 
 type Direction = 1 | -1;

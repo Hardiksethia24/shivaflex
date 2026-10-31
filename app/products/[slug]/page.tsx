@@ -74,10 +74,10 @@ export default async function ProductPage({
           </div>
 
           <div className="relative min-h-72 overflow-hidden rounded-lg bg-slate-200 shadow-card">
-            <ProductImage src={product.image} alt={`${product.name} product photo`} />
-            <span className="absolute bottom-2 right-2 rounded bg-black/60 px-2 py-0.5 text-[10px] text-white">
-              Slot: {product.image}
-            </span>
+            <ProductImage
+              src={product.image}
+              alt={`${product.name} coil, high-grade flexible PVC`}
+            />
           </div>
         </div>
       </section>

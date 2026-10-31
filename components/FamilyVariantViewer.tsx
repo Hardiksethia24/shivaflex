@@ -113,13 +113,10 @@ export function FamilyVariantViewer({ family }: { family: Product }) {
             <div className="relative aspect-[16/11] overflow-hidden rounded-lg border border-slate-200 bg-slate-100 shadow-inner">
               <ProductImage
                 src={activeVariant.image}
-                alt={`${family.name} - ${activeVariant.name} variant`}
+                alt={`${family.name} — ${activeVariant.name} variant coil, flexible PVC`}
                 className="transition duration-300 hover:scale-102"
               />
             </div>
-            <p className="mt-2 text-center text-xs text-slate-400">
-              Slot: {activeVariant.image}
-            </p>
 
             <div className="mt-6">
               <span className="rounded-full bg-orange-100 px-3 py-1 text-xs font-bold uppercase tracking-wide text-orange-700">

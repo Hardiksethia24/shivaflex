@@ -14,7 +14,7 @@ export function ProductCard({ product }: { product: Product }) {
         <div className="relative aspect-[16/10] overflow-hidden bg-slate-100">
           <ProductImage
             src={product.image}
-            alt={`${product.name} product photograph`}
+            alt={`${product.name} coil, ${product.applications[0] || "industrial PVC hose"}`}
             className="transition duration-500 group-hover:scale-105"
           />
           {hasVariants && (

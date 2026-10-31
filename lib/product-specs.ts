@@ -229,6 +229,7 @@ export const specTables: SpecTable[] = [
       { key: "packing", label: "Standard packing", unit: "m" },
     ],
     rows: [
+      { size: 8, id: 8, od: 13, wp: "70/100", bp: 225, packing: "2 x 60 / 1 x 100" },
       { size: 10, id: 10, od: 15.5, wp: "60/100", bp: 200, packing: "2 x 60 / 1 x 100" },
       { size: 12, id: 12, od: 17.5, wp: "60/100", bp: 200, packing: "2 x 60 / 1 x 100" },
     ],
