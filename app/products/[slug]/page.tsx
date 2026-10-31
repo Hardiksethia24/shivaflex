@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import { FamilyVariantViewer } from "@/components/FamilyVariantViewer";
 import { ProductImage } from "@/components/ProductImage";
-import { SpecTable } from "@/components/SpecTable";
+import { ProductSpecTable } from "@/components/ProductSpecTable";
 import { products, getProduct } from "@/lib/products";
 
 export function generateStaticParams() {
@@ -47,7 +47,9 @@ export default async function ProductPage({
               </Link>
               <span className="text-xs text-slate-400">/</span>
               <p className="eyebrow !m-0">
-                {hasVariants ? `Product Family · ${product.variants!.length} ${product.variantLabel || "Variants"}` : "Industrial Hose"}
+                {hasVariants
+                  ? `Product Family · ${product.variants!.length} ${product.variantLabel || "Variants"}`
+                  : "Industrial Hose"}
               </p>
             </div>
             <h1 className="section-title mt-2">{product.name}</h1>
@@ -69,9 +71,6 @@ export default async function ProductPage({
                 Download spec sheet <span className="ml-1 text-xs">[PDF]</span>
               </a>
             </div>
-            <p className="mt-4 text-xs text-slate-500">
-              [TODO: add approved product spec-sheet PDF at /public/spec-sheets/{product.slug}.pdf]
-            </p>
           </div>
 
           <div className="relative min-h-72 overflow-hidden rounded-lg bg-slate-200 shadow-card">
@@ -123,18 +122,20 @@ export default async function ProductPage({
 
               <div>
                 <p className="eyebrow">Specification Summary</p>
-                <h2 className="section-title">Available Configuration</h2>
-                <div className="mt-6">
-                  <SpecTable product={product} />
+                <div className="mt-4">
+                  <ProductSpecTable
+                    familySlug={product.slug}
+                    productName={product.name}
+                  />
                 </div>
 
-                {/* RFQ Prompt Box */}
+                {/* RFQ Prompt Box (no TODO marker) */}
                 <div className="mt-8 border border-brand/20 bg-mist p-6">
                   <h3 className="font-display text-xl uppercase text-ink">
                     Need a custom size, length, or pressure rating? Tell us your spec.
                   </h3>
                   <p className="mt-2 text-sm text-slate-600">
-                    Final configuration, material suitability and ratings must be confirmed with Shivaflex for your operating conditions. Fields marked [TODO: confirm spec] await client-confirmed product data.
+                    Final configuration, material suitability, and ratings can be tailored for your specific operating conditions.
                   </p>
                   <Link
                     href={`/contact?product=${encodeURIComponent(product.name)}#rfq`}

@@ -48,8 +48,8 @@ const productFamiliesNav: NavFamily[] = [
     name: "Suction Pipe",
     href: "/products/suction-pipe",
     variants: [
-      { name: "Type 1", href: "/products/suction-pipe?variant=type-1" },
-      { name: "Type 2", href: "/products/suction-pipe?variant=type-2" },
+      { name: "Medium Duty", href: "/products/suction-pipe?variant=medium-duty" },
+      { name: "Heavy Duty", href: "/products/suction-pipe?variant=heavy-duty" },
       { name: "Type 3", href: "/products/suction-pipe?variant=type-3" },
     ],
   },

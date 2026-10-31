@@ -4,9 +4,9 @@ export type ProductVariant = {
   image: string;
   short?: string;
   features?: string[];
-  sizes: string;
-  workingPressure: string;
-  burstingPressure: string;
+  sizes?: string;
+  workingPressure?: string;
+  burstingPressure?: string;
   applications?: string[];
 };
 
@@ -293,32 +293,26 @@ export const products: Product[] = [
     variantLabel: "Variants",
     variants: [
       {
-        slug: "type-1",
-        name: "Type 1",
-        image: "/images/products/suction-pipe-type-1.jpg",
-        short: "Suction Pipe Type 1 configuration engineered for standard-duty suction and water delivery.",
+        slug: "medium-duty",
+        name: "Medium Duty",
+        image: "/images/products/suction-pipe-medium-duty.jpg",
+        short: "Medium Duty (Green) suction hose engineered for irrigation, agriculture, and general fluid transfer.",
         features: [
-          "Spiral-reinforced PVC construction",
+          "Spiral-reinforced PVC construction resists vacuum collapse",
           "Balanced flexibility and vacuum resistance for standard agricultural pump setups",
           "Smooth interior profile for unhindered liquid transfer",
         ],
-        sizes: "[TODO: confirm spec]",
-        workingPressure: "[TODO: confirm spec]",
-        burstingPressure: "[TODO: confirm spec]",
       },
       {
-        slug: "type-2",
-        name: "Type 2",
-        image: "/images/products/suction-pipe-type-2.jpg",
-        short: "Suction Pipe Type 2 configuration engineered for medium-to-heavy suction requirements.",
+        slug: "heavy-duty",
+        name: "Heavy Duty",
+        image: "/images/products/suction-pipe-heavy-duty.jpg",
+        short: "Heavy Duty suction hose engineered for severe vacuum conditions, dewatering, and abrasive material transfer.",
         features: [
           "Reinforced spiral helix designed for higher vacuum and pump head duties",
           "Increased wall thickness for enhanced crush resistance on work sites",
           "Excellent bending radius for confined suction line installations",
         ],
-        sizes: "[TODO: confirm spec]",
-        workingPressure: "[TODO: confirm spec]",
-        burstingPressure: "[TODO: confirm spec]",
       },
       {
         slug: "type-3",
@@ -330,9 +324,6 @@ export const products: Product[] = [
           "Abrasion-resistant compound stands up to sand, gravel, and particulate slurries",
           "Extreme weather and impact resilience",
         ],
-        sizes: "[TODO: confirm spec]",
-        workingPressure: "[TODO: confirm spec]",
-        burstingPressure: "[TODO: confirm spec]",
       },
     ],
   },

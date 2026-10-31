@@ -22,11 +22,46 @@ const removedProductSlugs = [
 const nextConfig: NextConfig = {
   images: { localPatterns: [{ pathname: "/images/**" }] },
   async redirects() {
-    return removedProductSlugs.map((slug) => ({
+    const baseRedirects = removedProductSlugs.map((slug) => ({
       source: `/products/${slug}`,
       destination: "/products",
       permanent: true,
     }));
+
+    const suctionRedirects = [
+      {
+        source: "/products/type-1",
+        destination: "/products/suction-pipe?variant=medium-duty",
+        permanent: true,
+      },
+      {
+        source: "/products/type-2",
+        destination: "/products/suction-pipe?variant=heavy-duty",
+        permanent: true,
+      },
+      {
+        source: "/products/suction-pipe/type-1",
+        destination: "/products/suction-pipe?variant=medium-duty",
+        permanent: true,
+      },
+      {
+        source: "/products/suction-pipe/type-2",
+        destination: "/products/suction-pipe?variant=heavy-duty",
+        permanent: true,
+      },
+      {
+        source: "/products/suction-pipe-type-1",
+        destination: "/products/suction-pipe?variant=medium-duty",
+        permanent: true,
+      },
+      {
+        source: "/products/suction-pipe-type-2",
+        destination: "/products/suction-pipe?variant=heavy-duty",
+        permanent: true,
+      },
+    ];
+
+    return [...baseRedirects, ...suctionRedirects];
   },
 };
 

@@ -5,19 +5,26 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import type { Product, ProductVariant } from "@/lib/products";
 import { ProductImage } from "./ProductImage";
-import { SpecTable } from "./SpecTable";
+import { ProductSpecTable } from "./ProductSpecTable";
+
+function mapVariantSlug(slug: string | null): string | null {
+  if (!slug) return null;
+  if (slug === "type-1") return "medium-duty";
+  if (slug === "type-2") return "heavy-duty";
+  return slug;
+}
 
 export function FamilyVariantViewer({ family }: { family: Product }) {
   const searchParams = useSearchParams();
   const variants = family.variants || [];
-  
-  // Initialize with URL param if valid, otherwise default to first variant
-  const initialSlug = searchParams.get("variant");
+
+  // Map legacy slugs (type-1, type-2) to the new ones (medium-duty, heavy-duty)
+  const initialSlug = mapVariantSlug(searchParams.get("variant"));
   const initialIndex = variants.findIndex((v) => v.slug === initialSlug);
   const [selectedIndex, setSelectedIndex] = useState(initialIndex >= 0 ? initialIndex : 0);
 
   useEffect(() => {
-    const slug = searchParams.get("variant");
+    const slug = mapVariantSlug(searchParams.get("variant"));
     if (slug) {
       const idx = variants.findIndex((v) => v.slug === slug);
       if (idx >= 0) setSelectedIndex(idx);
@@ -28,9 +35,20 @@ export function FamilyVariantViewer({ family }: { family: Product }) {
   if (!activeVariant) return null;
 
   const variantLabel = family.variantLabel || "Variant";
+  const isGardenPipe = family.slug === "garden-pipe";
 
   return (
     <div className="space-y-10">
+      {/* Garden Pipe Main Family Specification Table (shows once on main page) */}
+      {isGardenPipe && (
+        <div>
+          <ProductSpecTable
+            familySlug="garden-pipe"
+            productName={family.name}
+          />
+        </div>
+      )}
+
       {/* Variant Selector Tabs / Cards */}
       <div>
         <div className="flex items-center justify-between">
@@ -76,7 +94,7 @@ export function FamilyVariantViewer({ family }: { family: Product }) {
                 >
                   {variant.name}
                 </span>
-                {variant.sizes && variant.sizes !== "[TODO: confirm spec]" && (
+                {variant.sizes && (
                   <span className="mt-1 inline-block rounded bg-slate-100 px-1.5 py-0.5 text-[11px] font-semibold text-slate-600">
                     {variant.sizes}
                   </span>
@@ -150,18 +168,18 @@ export function FamilyVariantViewer({ family }: { family: Product }) {
             </div>
           </div>
 
-          {/* Right Column: Spec Table & Quote CTA */}
-          <div className="flex flex-col justify-between">
+          {/* Right Column: Spec Table & Applications */}
+          <div className="flex flex-col justify-between gap-8">
             <div>
               <p className="eyebrow">Specifications</p>
-              <h3 className="section-title text-2xl sm:text-3xl">
-                Configuration & Ratings
-              </h3>
 
-              <div className="mt-6">
-                <SpecTable
-                  variant={activeVariant}
-                  parentFamily={family}
+              {/* Spec Table strictly rendered from product-specs.ts */}
+              <div className="mt-3">
+                <ProductSpecTable
+                  familySlug={family.slug}
+                  variantSlug={activeVariant.slug}
+                  productName={family.name}
+                  variantName={activeVariant.name}
                 />
               </div>
 
@@ -183,13 +201,13 @@ export function FamilyVariantViewer({ family }: { family: Product }) {
               </div>
             </div>
 
-            {/* RFQ Prompt Box */}
-            <div className="mt-10 rounded-lg border border-brand/20 bg-mist p-6">
+            {/* Direct Inquire Box */}
+            <div className="rounded-lg border border-brand/20 bg-mist p-6">
               <h4 className="font-display text-lg uppercase text-ink">
-                Need a specific length, custom fitting, or pressure rating?
+                Need a specific length, custom fitting, or custom requirement?
               </h4>
               <p className="mt-2 text-xs leading-relaxed text-slate-600">
-                Shivom Rubber Products manufactures to your operational parameters. Fields marked [TODO: confirm spec] await client-confirmed product data.
+                Shivom Rubber Products manufactures to your operational parameters across India.
               </p>
               <Link
                 href={`/contact?product=${encodeURIComponent(family.name)}&variant=${encodeURIComponent(

@@ -40,8 +40,8 @@ Drop photographs into `public` using these exact filenames. The matching site sl
 
 ### 6. Suction Pipe
 - [x] `public/images/products/suction-pipe.jpg` — family cover image
-- [x] `public/images/products/suction-pipe-type-1.jpg` — Type 1 variant
-- [x] `public/images/products/suction-pipe-type-2.jpg` — Type 2 variant
+- [x] `public/images/products/suction-pipe-medium-duty.jpg` — Medium Duty variant
+- [x] `public/images/products/suction-pipe-heavy-duty.jpg` — Heavy Duty variant
 - [x] `public/images/products/suction-pipe-type-3.jpg` — Type 3 variant
 
 ### 7. Super Car Washing Hose

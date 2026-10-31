@@ -12,14 +12,17 @@ function RFQFormInner({ mode = "rfq" }: { mode?: Mode }) {
 
   const urlProduct = searchParams.get("product") || "";
   const urlVariant = searchParams.get("variant") || "";
+  const urlSize = searchParams.get("size") || "";
 
   const [selectedProduct, setSelectedProduct] = useState(urlProduct);
   const [selectedVariant, setSelectedVariant] = useState(urlVariant);
+  const [quantityOrSpec, setQuantityOrSpec] = useState(urlSize ? `Size: ${urlSize}` : "");
 
   useEffect(() => {
     if (urlProduct) setSelectedProduct(urlProduct);
     if (urlVariant) setSelectedVariant(urlVariant);
-  }, [urlProduct, urlVariant]);
+    if (urlSize) setQuantityOrSpec(`Size: ${urlSize}`);
+  }, [urlProduct, urlVariant, urlSize]);
 
   const activeFamily = products.find(
     (p) => p.name.toLowerCase() === selectedProduct.toLowerCase()
@@ -147,6 +150,8 @@ function RFQFormInner({ mode = "rfq" }: { mode?: Mode }) {
             <input
               name="quantity"
               className="field mt-1.5"
+              value={quantityOrSpec}
+              onChange={(e) => setQuantityOrSpec(e.target.value)}
               placeholder="e.g. 200 m, 50 mm I.D., working pressure rating, or custom reel length"
             />
           </label>
