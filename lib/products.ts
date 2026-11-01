@@ -97,9 +97,6 @@ export const products: Product[] = [
           "High flexibility for easy coiling and smooth garden routing",
           "Formulated with virgin PVC polymers for long service life",
         ],
-        sizes: "[TODO: confirm spec]",
-        workingPressure: "[TODO: confirm spec]",
-        burstingPressure: "[TODO: confirm spec]",
       },
       {
         slug: "garden-foam",
@@ -111,9 +108,6 @@ export const products: Product[] = [
           "Soft-touch feel with high kink recovery",
           "Ideal for landscaping, nurseries, and domestic gardens",
         ],
-        sizes: "[TODO: confirm spec]",
-        workingPressure: "[TODO: confirm spec]",
-        burstingPressure: "[TODO: confirm spec]",
       },
       {
         slug: "transparent-zebra",
@@ -125,9 +119,6 @@ export const products: Product[] = [
           "Combines translucency with enhanced abrasion resistance",
           "Flexible and durable under continuous daily watering",
         ],
-        sizes: "[TODO: confirm spec]",
-        workingPressure: "[TODO: confirm spec]",
-        burstingPressure: "[TODO: confirm spec]",
       },
       {
         slug: "shiva-gold",
@@ -139,9 +130,6 @@ export const products: Product[] = [
           "Superior UV and weather resistance prevents cracking in direct sunlight",
           "Engineered for durability without sacrificing flexibility",
         ],
-        sizes: "[TODO: confirm spec]",
-        workingPressure: "[TODO: confirm spec]",
-        burstingPressure: "[TODO: confirm spec]",
       },
       {
         slug: "nylon",
@@ -153,9 +141,6 @@ export const products: Product[] = [
           "Eliminates bulging and kinking under tap and pump pressures",
           "Long-life compound suitable for rugged field conditions",
         ],
-        sizes: "[TODO: confirm spec]",
-        workingPressure: "[TODO: confirm spec]",
-        burstingPressure: "[TODO: confirm spec]",
       },
     ],
   },
@@ -171,9 +156,6 @@ export const products: Product[] = [
       "Braided synthetic yarn reinforcement prevents bulging and pressure loss",
       "Weather and abrasion-resistant outer jacket stands up to rough terrain dragging",
     ],
-    sizes: "[TODO: confirm spec]",
-    workingPressure: "[TODO: confirm spec]",
-    burstingPressure: "[TODO: confirm spec]",
   },
   {
     slug: "braided-hose",
@@ -200,8 +182,6 @@ export const products: Product[] = [
           "Compact, lightweight, and easy to route through tight machinery spaces",
         ],
         sizes: "8 mm",
-        workingPressure: "[TODO: confirm spec]",
-        burstingPressure: "[TODO: confirm spec]",
       },
       {
         slug: "coloured-braided",
@@ -213,9 +193,6 @@ export const products: Product[] = [
           "Braided reinforcement handles consistent utility pressures",
           "UV-stabilized compounds protect against discoloration and degradation",
         ],
-        sizes: "[TODO: confirm spec]",
-        workingPressure: "[TODO: confirm spec]",
-        burstingPressure: "[TODO: confirm spec]",
       },
       {
         slug: "water-braided",
@@ -227,9 +204,6 @@ export const products: Product[] = [
           "Kink-resistant braiding allows easy handling over long distances",
           "Abrasion-resistant cover built for construction and factory floors",
         ],
-        sizes: "[TODO: confirm spec]",
-        workingPressure: "[TODO: confirm spec]",
-        burstingPressure: "[TODO: confirm spec]",
       },
       {
         slug: "braided-ac-drainage",
@@ -241,9 +215,6 @@ export const products: Product[] = [
           "Reinforced wall prevents pinching and water stagnation inside conduits",
           "Resistant to mold, condensation, and chemical cleaners",
         ],
-        sizes: "[TODO: confirm spec]",
-        workingPressure: "[TODO: confirm spec]",
-        burstingPressure: "[TODO: confirm spec]",
       },
     ],
   },
@@ -259,9 +230,6 @@ export const products: Product[] = [
       "Smooth inner bore maximizes flow rate while minimizing pump head loss",
       "Tough exterior resists scuffing across gravel, soil, and concrete",
     ],
-    sizes: "[TODO: confirm spec]",
-    workingPressure: "[TODO: confirm spec]",
-    burstingPressure: "[TODO: confirm spec]",
   },
   {
     slug: "25mm-pneumatic-hose",
@@ -276,8 +244,6 @@ export const products: Product[] = [
       "Flexible handling for workshops, construction bays, and manufacturing setups",
     ],
     sizes: "25 mm",
-    workingPressure: "[TODO: confirm spec]",
-    burstingPressure: "[TODO: confirm spec]",
   },
   {
     slug: "suction-pipe",
@@ -381,9 +347,6 @@ export const products: Product[] = [
       "Transparent or semi-translucent wall enables clear visual monitoring of flow and blockages",
       "Ideal for suction and discharge of water, slurries, chemicals, and industrial fluids",
     ],
-    sizes: "[TODO: confirm spec]",
-    workingPressure: "[TODO: confirm spec]",
-    burstingPressure: "[TODO: confirm spec]",
   },
   {
     slug: "duct-hose",
@@ -397,9 +360,6 @@ export const products: Product[] = [
       "Designed for dust collection, woodworking exhaust, agricultural grain/chaff conveying, and fumes",
       "Resistant to atmospheric weathering, moisture, and mild corrosive fumes",
     ],
-    sizes: "[TODO: confirm spec]",
-    workingPressure: "[TODO: confirm spec]",
-    burstingPressure: "[TODO: confirm spec]",
   },
   {
     slug: "5-layer-hose",
@@ -413,9 +373,6 @@ export const products: Product[] = [
       "Anti-algae inner layer protects fluid purity; UV-resistant outer layer withstands sunlight",
       "Exceptional elasticity and flexibility in both extreme summer heat and cold mornings",
     ],
-    sizes: "[TODO: confirm spec]",
-    workingPressure: "[TODO: confirm spec]",
-    burstingPressure: "[TODO: confirm spec]",
   },
   {
     slug: "rock-drill-hose",
@@ -429,9 +386,6 @@ export const products: Product[] = [
       "Oil-mist resistant inner tube compatible with air-line lubricators",
       "Engineered to meet tough mining, quarrying, and foundation-drilling safety demands",
     ],
-    sizes: "[TODO: confirm spec]",
-    workingPressure: "[TODO: confirm spec]",
-    burstingPressure: "[TODO: confirm spec]",
   },
 ];
 

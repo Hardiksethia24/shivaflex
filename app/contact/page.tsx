@@ -107,9 +107,6 @@ export default function ContactPage() {
             <div className="mt-7">
               <RFQForm />
             </div>
-            <p className="mt-4 text-xs text-slate-500">
-              [TODO: connect form to the approved email/CRM service before launch.]
-            </p>
           </div>
         </div>
       </section>
@@ -138,10 +135,8 @@ export default function ContactPage() {
                     {loc.contactDetails}
                   </p>
                 )}
-                <div className="mt-5 grid h-32 place-items-center bg-slate-100 text-center text-xs font-semibold text-slate-500">
-                  Map placeholder
-                  <br />
-                  [TODO: add approved embedded map]
+                <div className="mt-5 grid h-28 place-items-center bg-slate-100 text-center text-xs font-semibold text-slate-500 rounded">
+                  Facility Location
                 </div>
               </article>
             ))}

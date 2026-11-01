@@ -6,7 +6,6 @@ import Link from "next/link";
 import type { Product } from "@/lib/products";
 import { ProductImage } from "./ProductImage";
 import { ProductSpecTable } from "./ProductSpecTable";
-import { findSpecTable } from "@/lib/spec-helpers";
 
 export function FamilyVariantViewer({ family }: { family: Product }) {
   const router = useRouter();
@@ -58,7 +57,16 @@ export function FamilyVariantViewer({ family }: { family: Product }) {
   if (!activeVariant) return null;
 
   const isGardenPipe = family.slug === "garden-pipe";
-  const activeHasSpecTable = Boolean(findSpecTable(family.slug, activeVariant.slug));
+
+  const queryParams = new URLSearchParams();
+  queryParams.set("product", family.name);
+  if (activeVariant.name) {
+    queryParams.set("variant", activeVariant.name);
+  }
+  if (activeVariant.sizes && activeVariant.sizes.trim()) {
+    queryParams.set("size", activeVariant.sizes);
+  }
+  const inquireHref = `/contact?${queryParams.toString()}#rfq`;
 
   return (
     <div className="w-full max-w-full min-w-0 space-y-10">
@@ -168,25 +176,6 @@ export function FamilyVariantViewer({ family }: { family: Product }) {
                   ))}
                 </ul>
               </div>
-
-              {/* Action Buttons */}
-              <div className="mt-8 flex flex-wrap gap-3">
-                <Link
-                  href={`/contact?product=${encodeURIComponent(family.name)}&variant=${encodeURIComponent(
-                    activeVariant.name
-                  )}#rfq`}
-                  className="btn-primary text-xs sm:text-sm"
-                >
-                  Request this product
-                </Link>
-                <a
-                  className="btn-secondary text-xs sm:text-sm"
-                  href={`/spec-sheets/${family.slug}-${activeVariant.slug}.pdf`}
-                  aria-label={`Download ${family.name} ${activeVariant.name} spec sheet`}
-                >
-                  Download spec sheet <span className="ml-1 text-xs">[PDF]</span>
-                </a>
-              </div>
             </div>
           </div>
 
@@ -223,25 +212,21 @@ export function FamilyVariantViewer({ family }: { family: Product }) {
               </div>
             </div>
 
-            {/* Direct Inquire Box: Only show if the active variant has a spec table to avoid duplicate RFQ blocks */}
-            {activeHasSpecTable && (
-              <div className="rounded-lg border border-brand/20 bg-mist p-5 sm:p-6">
-                <h4 className="font-display text-lg uppercase text-ink">
-                  Need a custom size, length, or pressure rating?
-                </h4>
-                <p className="mt-2 text-xs sm:text-sm leading-relaxed text-slate-600">
-                  Shivom Rubber Products manufactures to your operational parameters across India.
-                </p>
-                <Link
-                  href={`/contact?product=${encodeURIComponent(family.name)}&variant=${encodeURIComponent(
-                    activeVariant.name
-                  )}#rfq`}
-                  className="btn-primary mt-4 inline-flex text-xs sm:text-sm"
-                >
-                  Request this product
-                </Link>
-              </div>
-            )}
+            {/* Direct Inquire Box: The only 'Request this product' button on family pages */}
+            <div className="rounded-lg border border-brand/20 bg-mist p-5 sm:p-6">
+              <h4 className="font-display text-lg uppercase text-ink">
+                Need a custom size, length, or pressure rating?
+              </h4>
+              <p className="mt-2 text-xs sm:text-sm leading-relaxed text-slate-600">
+                Shivom Rubber Products manufactures to your operational parameters across India.
+              </p>
+              <Link
+                href={inquireHref}
+                className="btn-primary mt-4 inline-flex text-xs sm:text-sm"
+              >
+                Request this product
+              </Link>
+            </div>
           </div>
         </div>
       </div>

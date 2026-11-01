@@ -120,7 +120,7 @@ export default function AboutQuality() {
             <p className="eyebrow">Quality Assurance</p>
             <h2 className="section-title">Built-In Quality at Every Stage</h2>
             <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-700 font-medium">
-              [TODO: insert actual certifications, if any exist] Quality isn't a final check — it's built into every stage, from raw material compounding to the pressure test before packaging.
+              Quality isn't a final check — it's built into every stage, from raw material compounding to the pressure test before packaging.
             </p>
           </Reveal>
         </div>

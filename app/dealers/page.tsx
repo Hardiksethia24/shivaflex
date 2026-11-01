@@ -87,9 +87,6 @@ export default function DealersPage() {
                 </p>
               </div>
             </div>
-            <p className="mt-6 text-sm text-slate-500">
-              [TODO: add active dealer territories and coverage map.]
-            </p>
           </div>
 
           <div className="border border-slate-200 bg-white p-7 shadow-card sm:p-9">

@@ -21,12 +21,22 @@ export function SpecTable({ product, variant, parentFamily }: SpecTableProps) {
       : parentFamily?.features || [];
 
   const specs: [string, string][] = [
-    ["Available Sizes", current.sizes || "[TODO: confirm spec]"],
-    ["Working Pressure", current.workingPressure || "[TODO: confirm spec]"],
-    ["Bursting Pressure", current.burstingPressure || "[TODO: confirm spec]"],
-    ["Applications", applications.length > 0 ? applications.join(", ") : "[TODO: confirm spec]"],
-    ["Key Features", features.length > 0 ? features.join("; ") : "[TODO: confirm spec]"],
-  ];
+    ["Available Sizes", current.sizes || ""],
+    ["Working Pressure", current.workingPressure || ""],
+    ["Bursting Pressure", current.burstingPressure || ""],
+    ["Applications", applications.length > 0 ? applications.join(", ") : ""],
+    ["Key Features", features.length > 0 ? features.join("; ") : ""],
+  ].filter(([_, value]) => Boolean(value && value.trim() !== "" && value !== "—")) as [string, string][];
+
+  if (specs.length === 0) {
+    return (
+      <div className="rounded-xl border border-slate-200 bg-white p-5 sm:p-6 shadow-sm">
+        <p className="font-display text-base sm:text-lg uppercase text-ink">
+          Specifications on request
+        </p>
+      </div>
+    );
+  }
 
   return (
     <div className="overflow-hidden border border-slate-200 bg-white">

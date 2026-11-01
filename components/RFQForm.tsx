@@ -137,7 +137,7 @@ function RFQFormInner({ mode = "rfq" }: { mode?: Mode }) {
                   {activeFamily!.variants!.map((v) => (
                     <option key={v.slug} value={v.name}>
                       {v.name}
-                      {v.sizes && v.sizes !== "[TODO: confirm spec]" ? ` (${v.sizes})` : ""}
+                      {v.sizes ? ` (${v.sizes})` : ""}
                     </option>
                   ))}
                 </select>

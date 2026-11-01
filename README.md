@@ -14,8 +14,6 @@ Next.js + TypeScript + Tailwind CSS catalogue and RFQ site for Shivom Rubber Pro
 - The master product list is [`lib/products.ts`](./lib/products.ts). It controls catalogue information, slugs and expected product image paths.
 - Place approved images in `public/images/` using the exact names in [`PHOTO-SHOT-LIST.md`](./PHOTO-SHOT-LIST.md). The reusable image component will replace its placeholder automatically.
 - The supplied Shivaflex logo is at `public/images/brand/logo.jpeg` and is rendered by `components/Logo.tsx`. Replace that file using the same name if a revised approved logo is supplied.
-- Product values marked `[TODO]` must be replaced by client-approved sizes, pressure ratings and construction details. Do not publish unconfirmed values.
-- Add approved PDFs at `public/spec-sheets/{product-slug}.pdf`.
 - The contact route is a safe v1 stub. Configure `app/api/contact/route.ts` with an approved email or CRM provider before launch.
 
 ## Mobile checks
@@ -26,13 +24,12 @@ Next.js + TypeScript + Tailwind CSS catalogue and RFQ site for Shivom Rubber Pro
 - Mobile menu locks background scroll, closes upon link navigation, and features an accordion for all 11 product families with nested variant expansion.
 - Product variant selectors use singular labels ("Variant 1", "Variant 2", etc.) in a clean 2-column grid with min-height 44px tap targets.
 - Product specification tables scroll horizontally within their own container with sticky frozen first columns.
-- Duplicate "Request this product" buttons removed; single standardized button ("Request this product") used consistently across product and family pages.
+- Exactly one "Request this product" button per product and family page, located in the bottom inquiry section.
 - Form inputs enforce 16px font-size to prevent iOS Safari auto-zooming, with full-width buttons on mobile.
 
 ## Client confirmation required
 
 - Unit 1 pin code: current company records show **334803**, while the brochure shows **343084**.
 - Actual certifications, if any.
-- Exact specifications for product lines marked `[TODO]`.
 - Dealer commercial terms and regional coverage.
 - The site palette uses the approved logo colors: deep royal blue `#084091`, secondary blue `#5681c4`, and CTA red `#e01519`.

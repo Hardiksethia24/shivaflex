@@ -5,7 +5,6 @@ import { Suspense } from "react";
 import { FamilyVariantViewer } from "@/components/FamilyVariantViewer";
 import { ProductImage } from "@/components/ProductImage";
 import { ProductSpecTable } from "@/components/ProductSpecTable";
-import { findSpecTable } from "@/lib/spec-helpers";
 import { getProduct, products } from "@/lib/products";
 
 export async function generateStaticParams() {
@@ -47,7 +46,6 @@ export default async function ProductPage({
   }
 
   const hasVariants = Boolean(product.variants && product.variants.length > 0);
-  const hasSpecTable = Boolean(findSpecTable(product.slug));
 
   return (
     <main className="w-full max-w-full overflow-x-clip">
@@ -73,21 +71,6 @@ export default async function ProductPage({
             <p className="mt-4 sm:mt-5 max-w-xl text-base sm:text-lg leading-relaxed text-slate-600">
               {product.short}
             </p>
-            <div className="mt-7 flex flex-wrap gap-3">
-              <Link
-                href={`/contact?product=${encodeURIComponent(product.name)}#rfq`}
-                className="btn-primary text-xs sm:text-sm"
-              >
-                Request this product
-              </Link>
-              <a
-                className="btn-secondary text-xs sm:text-sm"
-                href={`/spec-sheets/${product.slug}.pdf`}
-                aria-label={`Download ${product.name} spec sheet`}
-              >
-                Download spec sheet <span className="ml-1 text-xs">[PDF]</span>
-              </a>
-            </div>
           </div>
 
           <div className="relative aspect-[4/3] sm:aspect-[16/11] min-h-72 w-full overflow-hidden flex items-center justify-center">
@@ -146,23 +129,21 @@ export default async function ProductPage({
                   />
                 </div>
 
-                {/* RFQ Prompt Box: Only rendered if product has a spec table to avoid duplicate RFQ blocks */}
-                {hasSpecTable && (
-                  <div className="mt-8 border border-brand/20 bg-mist p-5 sm:p-6 rounded-lg">
-                    <h3 className="font-display text-lg sm:text-xl uppercase text-ink">
-                      Need a custom size, length, or pressure rating?
-                    </h3>
-                    <p className="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed">
-                      Final configuration, material suitability, and ratings can be tailored for your specific operating conditions.
-                    </p>
-                    <Link
-                      href={`/contact?product=${encodeURIComponent(product.name)}#rfq`}
-                      className="btn-primary mt-4 inline-flex text-xs sm:text-sm"
-                    >
-                      Request this product
-                    </Link>
-                  </div>
-                )}
+                {/* RFQ Prompt Box: The only 'Request this product' button on single product pages */}
+                <div className="mt-8 border border-brand/20 bg-mist p-5 sm:p-6 rounded-lg">
+                  <h3 className="font-display text-lg sm:text-xl uppercase text-ink">
+                    Need a custom size, length, or pressure rating?
+                  </h3>
+                  <p className="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed">
+                    Final configuration, material suitability, and ratings can be tailored for your specific operating conditions.
+                  </p>
+                  <Link
+                    href={`/contact?product=${encodeURIComponent(product.name)}#rfq`}
+                    className="btn-primary mt-4 inline-flex text-xs sm:text-sm"
+                  >
+                    Request this product
+                  </Link>
+                </div>
               </div>
             </div>
           )}

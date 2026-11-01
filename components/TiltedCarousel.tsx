@@ -5,7 +5,6 @@ import { motion, useReducedMotion } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { ProductImage } from "./ProductImage";
 
-// TODO: swap these src paths once real photography is dropped into /public/images/about/
 const SLIDES = [
   { src: "/images/about/plant-1.jpg", alt: "Shivaflex manufacturing floor", title: "Manufacturing floor" },
   { src: "/images/about/plant-2.jpg", alt: "Extrusion line at the Nokha unit", title: "Extrusion line" },

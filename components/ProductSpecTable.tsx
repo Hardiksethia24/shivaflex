@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { specTables, SpecTable } from "@/lib/product-specs";
 
@@ -33,6 +32,13 @@ function extractRowSize(row: Record<string, string | number>): string {
   return "";
 }
 
+function isRealValue(val: unknown): boolean {
+  if (val === undefined || val === null) return false;
+  const str = String(val).trim();
+  if (str === "" || str === "—" || str === "-") return false;
+  return true;
+}
+
 export function ProductSpecTable({
   familySlug,
   variantSlug,
@@ -42,24 +48,32 @@ export function ProductSpecTable({
   const router = useRouter();
   const table = findSpecTable(familySlug, variantSlug);
 
-  // If no entry exists in specTables: show "Specifications on request" with "Request this product" button
-  // If no entry exists in specTables: show single merged block with "Request this product"
+  // If no entry exists in specTables: show only the line "Specifications on request" without a button
   if (!table) {
-    const quoteHref = `/contact?product=${encodeURIComponent(productName)}${
-      variantName ? `&variant=${encodeURIComponent(variantName)}` : ""
-    }#rfq`;
-
     return (
-      <div className="rounded-xl border border-brand/20 bg-mist p-5 sm:p-6 shadow-sm">
-        <h3 className="font-display text-lg sm:text-xl uppercase text-ink">
+      <div className="rounded-xl border border-slate-200 bg-white p-5 sm:p-6 shadow-sm">
+        <p className="font-display text-base sm:text-lg uppercase text-ink">
           Specifications on request
-        </h3>
-        <p className="mt-2 text-xs sm:text-sm leading-relaxed text-slate-600">
-          Need a custom size, length, or pressure rating? Final configuration, material suitability, and ratings can be tailored for your specific operating conditions.
         </p>
-        <Link href={quoteHref} className="btn-primary mt-4 inline-flex text-xs sm:text-sm">
-          Request this product
-        </Link>
+      </div>
+    );
+  }
+
+  // Filter rows and columns with real values
+  const validRows = table.rows.filter((row) =>
+    table.columns.some((col) => isRealValue(row[col.key]))
+  );
+
+  const validColumns = table.columns.filter((col) =>
+    validRows.some((row) => isRealValue(row[col.key]))
+  );
+
+  if (validRows.length === 0 || validColumns.length === 0) {
+    return (
+      <div className="rounded-xl border border-slate-200 bg-white p-5 sm:p-6 shadow-sm">
+        <p className="font-display text-base sm:text-lg uppercase text-ink">
+          Specifications on request
+        </p>
       </div>
     );
   }
@@ -104,7 +118,7 @@ export function ProductSpecTable({
             <caption className="sr-only">{table.title}</caption>
             <thead>
               <tr className="bg-[#084091]/[0.08] text-[#084091]">
-                {table.columns.map((col, idx) => {
+                {validColumns.map((col, idx) => {
                   const isFirst = idx === 0;
                   return (
                     <th
@@ -128,7 +142,7 @@ export function ProductSpecTable({
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100">
-              {table.rows.map((row, rIdx) => {
+              {validRows.map((row, rIdx) => {
                 const rowSize = extractRowSize(row);
                 return (
                   <tr
@@ -137,7 +151,7 @@ export function ProductSpecTable({
                     title={rowSize ? `Click to request quote for size ${rowSize}` : "Click to request quote"}
                     className="group cursor-pointer transition-colors duration-150 odd:bg-white even:bg-[#F5F8FC] hover:bg-orange-50/70"
                   >
-                    {table.columns.map((col, cIdx) => {
+                    {validColumns.map((col, cIdx) => {
                       const isFirst = cIdx === 0;
                       const val = row[col.key];
                       return (
@@ -149,7 +163,7 @@ export function ProductSpecTable({
                               : ""
                           }`}
                         >
-                          {val !== undefined && val !== null ? String(val) : "—"}
+                          {isRealValue(val) ? String(val) : "—"}
                         </td>
                       );
                     })}
