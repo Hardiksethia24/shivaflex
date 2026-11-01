@@ -57,7 +57,6 @@ const productFamiliesNav: NavFamily[] = [
     name: "Super Car Washing Hose",
     href: "/products/super-car-washing-hose",
     variants: [
-      { name: "8mm", href: "/products/super-car-washing-hose?variant=8mm" },
       { name: "10mm", href: "/products/super-car-washing-hose?variant=10mm" },
       { name: "12mm", href: "/products/super-car-washing-hose?variant=12mm" },
     ],

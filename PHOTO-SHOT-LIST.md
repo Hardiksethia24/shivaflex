@@ -46,7 +46,6 @@ Drop photographs into `public` using these exact filenames. The matching site sl
 
 ### 7. Super Car Washing Hose
 - [x] `public/images/products/super-car-washing-hose.jpg` — family cover image (Filled from super car washing 12mm.png)
-- [ ] `public/images/products/super-car-washing-hose-8mm.jpg` — 8mm size variant
 - [x] `public/images/products/super-car-washing-hose-10mm.jpg` — 10mm size variant (Filled from supercarwashingspray10mm.jpg)
 - [x] `public/images/products/super-car-washing-hose-12mm.jpg` — 12mm size variant (Filled from super car washing 12mm.png)
 
