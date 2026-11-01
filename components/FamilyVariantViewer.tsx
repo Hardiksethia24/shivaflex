@@ -1,87 +1,70 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useTransition, useEffect } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
-import type { Product, ProductVariant } from "@/lib/products";
+import type { Product } from "@/lib/products";
 import { ProductImage } from "./ProductImage";
 import { ProductSpecTable } from "./ProductSpecTable";
-
-function mapVariantSlug(slug: string | null): string | null {
-  if (!slug) return null;
-  if (slug === "type-1") return "medium-duty";
-  if (slug === "type-2") return "heavy-duty";
-  return slug;
-}
+import { findSpecTable } from "@/lib/spec-helpers";
 
 export function FamilyVariantViewer({ family }: { family: Product }) {
+  const router = useRouter();
   const searchParams = useSearchParams();
+  const [, startTransition] = useTransition();
+
   const variants = family.variants || [];
+  const variantLabel = family.variantLabel || "Variants";
+  const itemLabel = variantLabel === "Sizes" ? "Size" : "Variant";
 
-  // Map legacy slugs (type-1, type-2) to the new ones (medium-duty, heavy-duty)
-  const initialSlug = mapVariantSlug(searchParams.get("variant"));
-  const initialIndex = variants.findIndex((v) => v.slug === initialSlug);
-  const [selectedIndex, setSelectedIndex] = useState(initialIndex >= 0 ? initialIndex : 0);
+  // URL query parameter for active variant (e.g. ?variant=heavy-duty)
+  const variantParam = searchParams.get("variant");
 
-  // Sync state when user navigates with browser Back / Forward buttons (popstate)
-  useEffect(() => {
-    const handlePopState = () => {
-      const params = new URLSearchParams(window.location.search);
-      const slug = mapVariantSlug(params.get("variant"));
-      if (slug) {
-        const idx = variants.findIndex((v) => v.slug === slug);
-        if (idx >= 0) {
-          setSelectedIndex(idx);
-          return;
-        }
-      }
-      setSelectedIndex(0);
-    };
-
-    window.addEventListener("popstate", handlePopState);
-    return () => {
-      window.removeEventListener("popstate", handlePopState);
-    };
-  }, [variants]);
-
-  // Sync state if Next.js router navigates (e.g. from Header dropdown links)
-  useEffect(() => {
-    const params = new URLSearchParams(typeof window !== "undefined" ? window.location.search : "");
-    const slug = mapVariantSlug(params.get("variant") || searchParams.get("variant"));
-    if (slug) {
-      const idx = variants.findIndex((v) => v.slug === slug);
-      if (idx >= 0) {
-        setSelectedIndex(idx);
-        return;
-      }
-    } else {
-      setSelectedIndex(0);
-    }
-  }, [searchParams, variants]);
-
-  const handleSelectVariant = (index: number) => {
-    setSelectedIndex(index);
-    const variant = variants[index];
-    if (variant && typeof window !== "undefined") {
-      const currentUrl = new URL(window.location.href);
-      if (currentUrl.searchParams.get("variant") !== variant.slug) {
-        currentUrl.searchParams.set("variant", variant.slug);
-        window.history.pushState({ variant: variant.slug }, "", currentUrl.toString());
-      }
-    }
+  // Determine initial selected index from URL parameter
+  const getIndexFromParam = (param: string | null): number => {
+    if (!param) return 0;
+    const match = variants.findIndex(
+      (v) =>
+        v.slug.toLowerCase() === param.toLowerCase() ||
+        v.name.toLowerCase() === param.toLowerCase()
+    );
+    return match >= 0 ? match : 0;
   };
 
-  const activeVariant: ProductVariant | undefined = variants[selectedIndex] || variants[0];
+  const [selectedIndex, setSelectedIndex] = useState<number>(() =>
+    getIndexFromParam(variantParam)
+  );
+
+  // Sync state if URL changes externally (e.g. back/forward navigation)
+  useEffect(() => {
+    const idx = getIndexFromParam(variantParam);
+    setSelectedIndex(idx);
+  }, [variantParam]);
+
+  // Handle user clicking a variant chip/tab
+  const handleSelectVariant = (index: number) => {
+    setSelectedIndex(index);
+    const selected = variants[index];
+    if (!selected) return;
+
+    startTransition(() => {
+      const params = new URLSearchParams(searchParams.toString());
+      params.set("variant", selected.slug);
+      router.replace(`?${params.toString()}`, { scroll: false });
+    });
+  };
+
+  const activeVariant = variants[selectedIndex] || variants[0];
   if (!activeVariant) return null;
 
-  const variantLabel = family.variantLabel || "Variant";
   const isGardenPipe = family.slug === "garden-pipe";
+  const activeHasSpecTable = Boolean(findSpecTable(family.slug, activeVariant.slug));
 
   return (
-    <div className="space-y-10">
+    <div className="w-full max-w-full min-w-0 space-y-10">
       {/* Garden Pipe Main Family Specification Table (shows once on main page) */}
       {isGardenPipe && (
-        <div>
+        <div className="w-full max-w-full min-w-0">
           <ProductSpecTable
             familySlug="garden-pipe"
             productName={family.name}
@@ -90,17 +73,18 @@ export function FamilyVariantViewer({ family }: { family: Product }) {
       )}
 
       {/* Variant Selector Tabs / Cards */}
-      <div>
+      <div className="w-full max-w-full min-w-0">
         <div className="flex items-center justify-between">
           <p className="text-xs font-bold uppercase tracking-wider text-brand">
-            Select {variantLabel} ({variants.length} available)
+            Select {itemLabel} ({variants.length} available)
           </p>
-          <span className="text-xs text-slate-500">
+          <span className="text-xs text-slate-500 hidden sm:inline">
             Click to view specifications & imagery
           </span>
         </div>
 
-        <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+        {/* Responsive Variant Chips: clean 2-column grid on mobile with min 44px tap targets */}
+        <div className="mt-4 grid grid-cols-2 gap-2.5 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
           {variants.map((variant, index) => {
             const isSelected = index === selectedIndex;
             return (
@@ -108,7 +92,7 @@ export function FamilyVariantViewer({ family }: { family: Product }) {
                 key={variant.slug}
                 type="button"
                 onClick={() => handleSelectVariant(index)}
-                className={`group relative flex flex-col items-start rounded-lg border p-3.5 text-left transition duration-150 ${
+                className={`group relative flex min-h-[44px] flex-col items-start justify-center rounded-lg border p-3 text-left transition duration-150 ${
                   isSelected
                     ? "border-orange-500 bg-orange-50/50 shadow-sm ring-2 ring-orange-500/20"
                     : "border-slate-200 bg-white hover:border-slate-300 hover:bg-slate-50"
@@ -117,25 +101,25 @@ export function FamilyVariantViewer({ family }: { family: Product }) {
               >
                 <div className="flex w-full items-center justify-between">
                   <span
-                    className={`text-xs font-bold uppercase tracking-wider ${
+                    className={`text-[11px] font-bold uppercase tracking-wider ${
                       isSelected ? "text-orange-600" : "text-slate-400 group-hover:text-slate-600"
                     }`}
                   >
-                    {variantLabel} {index + 1}
+                    {itemLabel} {index + 1}
                   </span>
                   {isSelected && (
                     <span className="h-2 w-2 rounded-full bg-orange-500" aria-hidden="true" />
                   )}
                 </div>
                 <span
-                  className={`mt-1 font-display text-base font-bold uppercase leading-snug sm:text-lg ${
+                  className={`mt-1 font-display text-sm sm:text-base font-bold uppercase leading-snug ${
                     isSelected ? "text-ink" : "text-slate-700"
                   }`}
                 >
                   {variant.name}
                 </span>
                 {variant.sizes && (
-                  <span className="mt-1 inline-block rounded bg-slate-100 px-1.5 py-0.5 text-[11px] font-semibold text-slate-600">
+                  <span className="mt-1 inline-block rounded bg-slate-100 px-1.5 py-0.5 text-[10px] font-semibold text-slate-600">
                     {variant.sizes}
                   </span>
                 )}
@@ -146,11 +130,11 @@ export function FamilyVariantViewer({ family }: { family: Product }) {
       </div>
 
       {/* Selected Variant Showcase */}
-      <div className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm md:p-8">
-        <div className="grid gap-10 lg:grid-cols-2">
+      <div className="w-full max-w-full min-w-0 rounded-xl border border-slate-200 bg-white p-4 sm:p-6 md:p-8 shadow-sm">
+        <div className="grid min-w-0 gap-8 lg:grid-cols-2 lg:gap-10">
           {/* Left Column: Image & Overview */}
-          <div>
-            <div className="relative aspect-[16/11] overflow-hidden bg-white flex items-center justify-center">
+          <div className="min-w-0">
+            <div className="relative aspect-[16/11] w-full overflow-hidden bg-white flex items-center justify-center">
               <ProductImage
                 key={activeVariant.image}
                 src={activeVariant.image}
@@ -173,7 +157,7 @@ export function FamilyVariantViewer({ family }: { family: Product }) {
               {/* Key Features for Variant */}
               <div className="mt-6">
                 <h3 className="text-xs font-bold uppercase tracking-wider text-brand">
-                  Variant Features
+                  Key Specifications & Highlights
                 </h3>
                 <ul className="mt-3 space-y-2 text-sm text-slate-700">
                   {(activeVariant.features || family.features).map((feat) => (
@@ -191,12 +175,12 @@ export function FamilyVariantViewer({ family }: { family: Product }) {
                   href={`/contact?product=${encodeURIComponent(family.name)}&variant=${encodeURIComponent(
                     activeVariant.name
                   )}#rfq`}
-                  className="btn-primary"
+                  className="btn-primary text-xs sm:text-sm"
                 >
-                  Request This {variantLabel}
+                  Request this product
                 </Link>
                 <a
-                  className="btn-secondary"
+                  className="btn-secondary text-xs sm:text-sm"
                   href={`/spec-sheets/${family.slug}-${activeVariant.slug}.pdf`}
                   aria-label={`Download ${family.name} ${activeVariant.name} spec sheet`}
                 >
@@ -207,12 +191,12 @@ export function FamilyVariantViewer({ family }: { family: Product }) {
           </div>
 
           {/* Right Column: Spec Table & Applications */}
-          <div className="flex flex-col justify-between gap-8">
-            <div>
+          <div className="flex min-w-0 flex-col justify-between gap-8">
+            <div className="min-w-0">
               <p className="eyebrow">Specifications</p>
 
               {/* Spec Table strictly rendered from product-specs.ts */}
-              <div className="mt-3">
+              <div className="mt-3 min-w-0">
                 <ProductSpecTable
                   familySlug={family.slug}
                   variantSlug={activeVariant.slug}
@@ -239,23 +223,25 @@ export function FamilyVariantViewer({ family }: { family: Product }) {
               </div>
             </div>
 
-            {/* Direct Inquire Box */}
-            <div className="rounded-lg border border-brand/20 bg-mist p-6">
-              <h4 className="font-display text-lg uppercase text-ink">
-                Need a specific length, custom fitting, or custom requirement?
-              </h4>
-              <p className="mt-2 text-xs leading-relaxed text-slate-600">
-                Shivom Rubber Products manufactures to your operational parameters across India.
-              </p>
-              <Link
-                href={`/contact?product=${encodeURIComponent(family.name)}&variant=${encodeURIComponent(
-                  activeVariant.name
-                )}#rfq`}
-                className="btn-primary mt-4 inline-flex text-xs"
-              >
-                Inquire About {activeVariant.name}
-              </Link>
-            </div>
+            {/* Direct Inquire Box: Only show if the active variant has a spec table to avoid duplicate RFQ blocks */}
+            {activeHasSpecTable && (
+              <div className="rounded-lg border border-brand/20 bg-mist p-5 sm:p-6">
+                <h4 className="font-display text-lg uppercase text-ink">
+                  Need a custom size, length, or pressure rating?
+                </h4>
+                <p className="mt-2 text-xs sm:text-sm leading-relaxed text-slate-600">
+                  Shivom Rubber Products manufactures to your operational parameters across India.
+                </p>
+                <Link
+                  href={`/contact?product=${encodeURIComponent(family.name)}&variant=${encodeURIComponent(
+                    activeVariant.name
+                  )}#rfq`}
+                  className="btn-primary mt-4 inline-flex text-xs sm:text-sm"
+                >
+                  Request this product
+                </Link>
+              </div>
+            )}
           </div>
         </div>
       </div>

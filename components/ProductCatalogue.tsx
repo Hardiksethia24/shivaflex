@@ -74,7 +74,7 @@ export function ProductCatalogue({
         )}
       </div>
 
-      <div className="mt-5 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="mt-5 grid grid-cols-2 gap-3 sm:gap-6 lg:grid-cols-3">
         {shown.map((product) => (
           <ProductCard key={product.slug} product={product} />
         ))}

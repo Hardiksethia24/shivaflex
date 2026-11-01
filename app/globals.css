@@ -2,14 +2,58 @@
 @tailwind components;
 @tailwind utilities;
 
-:root { color: #17212B; background: #fff; }
-* { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-body { margin: 0; background: #fff; color: #17212B; }
-input, select, textarea { font: inherit; }
-.container-site { @apply mx-auto w-full max-w-7xl px-5 sm:px-8; }
-.eyebrow { @apply text-xs font-bold uppercase tracking-[.18em] text-brand; }
-.section-title { @apply mt-2 font-display text-4xl font-bold uppercase leading-none text-ink sm:text-5xl; }
-.btn-primary { @apply inline-flex min-h-11 items-center justify-center rounded-sm bg-accent px-5 text-sm font-bold text-white transition hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2; }
-.btn-secondary { @apply inline-flex min-h-11 items-center justify-center rounded-sm border border-brand px-5 text-sm font-bold text-brand transition hover:border-secondary hover:bg-secondary hover:text-white focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2; }
-.field { @apply mt-1 w-full rounded-sm border border-slate-300 bg-white px-3 py-3 text-sm text-ink outline-none transition placeholder:text-slate-400 focus:border-brand focus:ring-2 focus:ring-brand/15; }
+:root {
+  color: #17212B;
+  background: #fff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: clip;
+  scroll-padding-top: 5.5rem;
+}
+
+body {
+  margin: 0;
+  background: #fff;
+  color: #17212B;
+  overflow-x: clip;
+  font-size: 16px;
+  line-height: 1.6;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* Ensure inputs, selects, and textareas are at least 16px on mobile to prevent iOS Safari auto-zoom */
+input, select, textarea {
+  font: inherit;
+  font-size: 16px !important;
+}
+
+.container-site {
+  @apply mx-auto w-full max-w-7xl px-4 sm:px-8;
+}
+
+.eyebrow {
+  @apply text-xs font-bold uppercase tracking-[.18em] text-brand;
+}
+
+.section-title {
+  @apply mt-2 font-display text-2xl font-bold uppercase leading-tight text-ink sm:text-4xl lg:text-5xl break-words;
+}
+
+.btn-primary {
+  @apply inline-flex min-h-[44px] items-center justify-center rounded-sm bg-accent px-5 text-sm font-bold text-white transition hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2;
+}
+
+.btn-secondary {
+  @apply inline-flex min-h-[44px] items-center justify-center rounded-sm border border-brand px-5 text-sm font-bold text-brand transition hover:border-secondary hover:bg-secondary hover:text-white focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2;
+}
+
+.field {
+  @apply mt-1 w-full rounded-sm border border-slate-300 bg-white px-3.5 py-3 text-[16px] text-ink outline-none transition placeholder:text-slate-400 focus:border-brand focus:ring-2 focus:ring-brand/15;
+}

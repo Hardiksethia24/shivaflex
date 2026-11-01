@@ -3,6 +3,17 @@
 import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
 
+// Known unphotographed slots that should immediately display the placeholder without a 404 network flash
+const KNOWN_PLACEHOLDER_IMAGES = new Set([
+  "/images/manufacturing/plant-floor.jpg",
+  "/images/manufacturing/extrusion-line.jpg",
+  "/images/about/team-leadership.jpg",
+  "/images/about/plant-1.jpg",
+  "/images/about/plant-2.jpg",
+  "/images/about/plant-3.jpg",
+  "/images/products/rock-drill-hose.jpg",
+]);
+
 export function ProductImage({
   src,
   alt,
@@ -12,20 +23,23 @@ export function ProductImage({
   alt: string;
   className?: string;
 }) {
-  const [failed, setFailed] = useState(false);
+  const isKnownMissing = Boolean(!src || KNOWN_PLACEHOLDER_IMAGES.has(src));
+  const [failed, setFailed] = useState(isKnownMissing);
   const [prevSrc, setPrevSrc] = useState(src);
   const imgRef = useRef<HTMLImageElement>(null);
 
   // Synchronously reset failed state during render when src changes
   if (prevSrc !== src) {
     setPrevSrc(src);
-    setFailed(false);
+    setFailed(Boolean(!src || KNOWN_PLACEHOLDER_IMAGES.has(src)));
   }
 
   // Check the image element's complete state on mount and whenever src changes.
-  // This handles cached images that complete before the onLoad handler attaches,
-  // as well as broken images where naturalWidth is 0.
   useEffect(() => {
+    if (isKnownMissing) {
+      setFailed(true);
+      return;
+    }
     setFailed(false);
 
     const checkComplete = () => {
@@ -38,17 +52,19 @@ export function ProductImage({
     };
 
     checkComplete();
-  }, [src]);
+  }, [src, isKnownMissing]);
 
   if (failed || !src) {
     return (
       <div
-        className={`grid min-h-48 place-items-center bg-slate-200 p-5 text-center text-sm font-semibold text-slate-500 ${className}`}
+        className={`flex h-full w-full min-h-48 flex-col items-center justify-center bg-slate-100 p-5 text-center text-sm font-semibold text-slate-500 ${className}`}
         role="img"
         aria-label={`${alt}. Photo coming soon`}
       >
-        <span className="text-3xl">⌾</span>
-        <span className="mt-2 block">Photo coming soon</span>
+        <span className="text-3xl text-slate-400">⌾</span>
+        <span className="mt-2 block text-xs font-semibold uppercase tracking-wider text-slate-500">
+          Photo coming soon
+        </span>
       </div>
     );
   }

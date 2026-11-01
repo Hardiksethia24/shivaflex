@@ -11,53 +11,8 @@ type ProductSpecTableProps = {
   variantName?: string;
 };
 
-// Map variant slugs, including backwards compatibility for type-1 / type-2
-function normalizeVariantSlug(slug?: string): string | undefined {
-  if (!slug) return undefined;
-  if (slug === "type-1") return "medium-duty";
-  if (slug === "type-2") return "heavy-duty";
-  return slug;
-}
-
-// Find matching spec table strictly from product-specs.ts
-export function findSpecTable(
-  familySlug: string,
-  variantSlug?: string
-): SpecTable | undefined {
-  const normFamily = (slug: string) => {
-    if (slug === "25mm-pneumatic-hose") return "pneumatic-hose-25mm";
-    return slug;
-  };
-
-  const targetFamily = normFamily(familySlug);
-  const targetVariant = normalizeVariantSlug(variantSlug);
-
-  // If a variant is specified:
-  if (targetVariant) {
-    // 1. Check for exact variant match (e.g. suction-pipe medium-duty, braided-hose water-braided)
-    const exact = specTables.find(
-      (t) => normFamily(t.family) === targetFamily && t.variant === targetVariant
-    );
-    if (exact) return exact;
-
-    // 2. For Super Car Washing Hose, the single table covers both 10mm and 12mm sizes
-    if (targetFamily === "super-car-washing-hose") {
-      return specTables.find((t) => normFamily(t.family) === targetFamily);
-    }
-
-    // 3. For Garden Pipe, five variants explicitly have no spec table
-    if (targetFamily === "garden-pipe") {
-      return undefined;
-    }
-
-    return undefined;
-  }
-
-  // Family-level match (no variant specified):
-  return specTables.find(
-    (t) => normFamily(t.family) === targetFamily && !t.variant
-  );
-}
+import { findSpecTable } from "@/lib/spec-helpers";
+export { findSpecTable };
 
 function getColourChipStyle(colour: string) {
   const c = colour.toLowerCase();
@@ -88,22 +43,21 @@ export function ProductSpecTable({
   const table = findSpecTable(familySlug, variantSlug);
 
   // If no entry exists in specTables: show "Specifications on request" with "Request this product" button
+  // If no entry exists in specTables: show single merged block with "Request this product"
   if (!table) {
     const quoteHref = `/contact?product=${encodeURIComponent(productName)}${
       variantName ? `&variant=${encodeURIComponent(variantName)}` : ""
     }#rfq`;
 
     return (
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 rounded-xl border border-slate-200 bg-white p-5 sm:p-6 shadow-sm">
-        <div>
-          <p className="font-display text-lg uppercase text-ink">
-            Specifications on request
-          </p>
-          <p className="mt-1 text-xs text-slate-500">
-            Custom lengths, pressure ratings, and fittings are built to your operational requirements.
-          </p>
-        </div>
-        <Link href={quoteHref} className="btn-primary shrink-0 text-xs sm:text-sm">
+      <div className="rounded-xl border border-brand/20 bg-mist p-5 sm:p-6 shadow-sm">
+        <h3 className="font-display text-lg sm:text-xl uppercase text-ink">
+          Specifications on request
+        </h3>
+        <p className="mt-2 text-xs sm:text-sm leading-relaxed text-slate-600">
+          Need a custom size, length, or pressure rating? Final configuration, material suitability, and ratings can be tailored for your specific operating conditions.
+        </p>
+        <Link href={quoteHref} className="btn-primary mt-4 inline-flex text-xs sm:text-sm">
           Request this product
         </Link>
       </div>
@@ -120,7 +74,7 @@ export function ProductSpecTable({
   };
 
   return (
-    <div className="rounded-xl border border-slate-200 bg-white p-5 sm:p-6 shadow-sm">
+    <div className="w-full max-w-full min-w-0 rounded-xl border border-slate-200 bg-white p-4 sm:p-6 shadow-sm">
       {/* Title & Colour Chip */}
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div className="flex flex-wrap items-center gap-3">
@@ -144,9 +98,9 @@ export function ProductSpecTable({
       </div>
 
       {/* Responsive Table Container: horizontal scroll inside, first column sticky */}
-      <div className="relative mt-4 w-full overflow-hidden rounded-lg border border-slate-200">
-        <div className="w-full overflow-x-auto">
-          <table className="w-full min-w-[580px] border-collapse text-left font-sans text-xs sm:text-sm">
+      <div className="relative mt-4 w-full max-w-full min-w-0 overflow-hidden rounded-lg border border-slate-200">
+        <div className="w-full max-w-full overflow-x-auto">
+          <table className="w-full min-w-[540px] border-collapse text-left font-sans text-xs sm:text-sm">
             <caption className="sr-only">{table.title}</caption>
             <thead>
               <tr className="bg-[#084091]/[0.08] text-[#084091]">
@@ -158,7 +112,7 @@ export function ProductSpecTable({
                       scope="col"
                       className={`px-3.5 py-3 align-bottom font-bold ${
                         isFirst
-                          ? "sticky left-0 z-20 bg-[#084091]/[0.08] backdrop-blur-md shadow-[1px_0_0_0_#cbd5e1]"
+                          ? "sticky left-0 z-20 bg-[#F0F5FC] shadow-[1px_0_0_0_#cbd5e1]"
                           : ""
                       }`}
                     >
@@ -191,7 +145,7 @@ export function ProductSpecTable({
                           key={col.key}
                           className={`px-3.5 py-2.5 text-slate-700 tabular-nums ${
                             isFirst
-                              ? "sticky left-0 z-10 font-semibold text-ink group-odd:bg-white group-even:bg-[#F5F8FC] group-hover:bg-orange-50/70 shadow-[1px_0_0_0_#e2e8f0]"
+                              ? "sticky left-0 z-10 font-semibold text-ink bg-white group-odd:bg-white group-even:bg-[#F5F8FC] group-hover:bg-[#fff7ed] shadow-[1px_0_0_0_#e2e8f0]"
                               : ""
                           }`}
                         >

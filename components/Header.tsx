@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Logo } from "./Logo";
 
 type NavFamily = {
@@ -87,6 +87,18 @@ export function Header() {
   const [hoveredFamily, setHoveredFamily] = useState<string | null>(null);
   const closeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
+  // Lock background scrolling when mobile menu is open
+  useEffect(() => {
+    if (mobileNavOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobileNavOpen]);
+
   const handleMouseEnter = () => {
     if (closeTimeoutRef.current) {
       clearTimeout(closeTimeoutRef.current);
@@ -134,8 +146,8 @@ export function Header() {
         </div>
       </div>
 
-      {/* Main Navigation Bar */}
-      <div className="border-b border-slate-200 bg-white/95 backdrop-blur">
+      {/* Main Navigation Bar: Solid white with hairline bottom border, no transparency or backdrop blur */}
+      <div className="border-b border-slate-200 bg-white">
         <div className="container-site flex min-h-[76px] items-center justify-between gap-5 py-3">
           <Logo />
 
@@ -271,17 +283,20 @@ export function Header() {
 
           <button
             onClick={() => setMobileNavOpen(!mobileNavOpen)}
-            className="grid h-10 w-10 place-items-center rounded-md border border-slate-300 text-slate-800 hover:border-slate-400 lg:hidden"
+            className="grid h-11 w-11 min-h-[44px] min-w-[44px] place-items-center rounded-md border border-slate-300 text-slate-800 hover:border-slate-400 lg:hidden"
             aria-expanded={mobileNavOpen}
             aria-label="Toggle navigation"
           >
-            <span className="text-xl">☰</span>
+            <span className="text-xl font-bold">{mobileNavOpen ? "✕" : "☰"}</span>
           </button>
         </div>
 
-        {/* Mobile Navigation Drawer */}
+        {/* Mobile Navigation Drawer: Solid white, scrollable */}
         {mobileNavOpen && (
-          <nav className="border-t border-slate-200 bg-white px-5 py-4 lg:hidden" aria-label="Mobile navigation">
+          <nav
+            className="max-h-[calc(100vh-120px)] overflow-y-auto border-t border-slate-200 bg-white px-4 py-4 pb-12 lg:hidden shadow-lg"
+            aria-label="Mobile navigation"
+          >
             <div className="container-site grid gap-1">
               <div>
                 <button

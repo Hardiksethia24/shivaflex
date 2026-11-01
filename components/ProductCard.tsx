@@ -134,7 +134,7 @@ export function ProductCard({ product }: { product: Product }) {
 
           {/* Variant Badge */}
           {hasVariants && (
-            <span className="absolute top-2.5 right-2.5 z-20 rounded-full bg-slate-900/80 px-2.5 py-0.5 text-[11px] font-semibold tracking-wide text-white backdrop-blur transition-all duration-300">
+            <span className="absolute top-2 right-2 z-20 rounded-full bg-slate-900/80 px-2 py-0.5 text-[9px] sm:text-[11px] font-semibold tracking-wide text-white backdrop-blur transition-all duration-300">
               {validSlides.length > 1 ? validSlides[activeIndex]?.name : variantBadge}
             </span>
           )}
@@ -143,7 +143,7 @@ export function ProductCard({ product }: { product: Product }) {
         {/* Variant Indicator Dots (borderless) */}
         {validSlides.length > 1 && (
           <div
-            className="flex items-center justify-center gap-1.5 py-2 bg-white"
+            className="flex items-center justify-center gap-1.5 py-1.5 sm:py-2 bg-white"
             aria-label={`${product.name} variant selection`}
           >
             {validSlides.map((slide, idx) => (
@@ -158,7 +158,7 @@ export function ProductCard({ product }: { product: Product }) {
                 aria-label={`View ${slide.name} variant`}
                 className={`h-1.5 rounded-full transition-all duration-300 ${
                   idx === activeIndex
-                    ? "w-4 bg-brand"
+                    ? "w-3.5 sm:w-4 bg-brand"
                     : "w-1.5 bg-slate-300 hover:bg-slate-400"
                 }`}
               />
@@ -167,23 +167,23 @@ export function ProductCard({ product }: { product: Product }) {
         )}
 
         {/* Text Area: Visually separate from the photo */}
-        <div className="p-4 sm:p-5 bg-white border-t border-slate-100">
-          <p className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-brand">
+        <div className="p-3 sm:p-5 bg-white border-t border-slate-100">
+          <p className="text-[9px] sm:text-xs font-bold uppercase tracking-wider text-brand line-clamp-1">
             {product.applications[0] || "Industrial Hose"}
           </p>
-          <h3 className="mt-1 sm:mt-1.5 font-display text-lg sm:text-2xl uppercase leading-snug text-ink transition-colors duration-200 group-hover:text-brand">
+          <h3 className="mt-1 font-display text-sm sm:text-xl uppercase leading-tight sm:leading-snug text-ink transition-colors duration-200 group-hover:text-brand line-clamp-2">
             {product.name}
           </h3>
-          <p className="mt-1.5 sm:mt-2.5 text-xs sm:text-sm leading-relaxed text-slate-600 line-clamp-2">
+          <p className="mt-1 sm:mt-2 text-xs sm:text-sm leading-relaxed text-slate-600 line-clamp-2">
             {product.short}
           </p>
         </div>
       </div>
 
-      <div className="px-4 pb-4 sm:px-5 sm:pb-5 bg-white">
+      <div className="px-3 pb-3 sm:px-5 sm:pb-5 bg-white">
         <Link
           href={`/products/${product.slug}`}
-          className="inline-block text-xs sm:text-sm font-bold text-brand hover:underline"
+          className="inline-block text-[11px] sm:text-sm font-bold text-brand hover:underline"
         >
           {hasVariants ? "View variants & specs →" : "View specifications →"}
         </Link>

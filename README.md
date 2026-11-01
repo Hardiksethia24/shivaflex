@@ -18,6 +18,17 @@ Next.js + TypeScript + Tailwind CSS catalogue and RFQ site for Shivom Rubber Pro
 - Add approved PDFs at `public/spec-sheets/{product-slug}.pdf`.
 - The contact route is a safe v1 stub. Configure `app/api/contact/route.ts` with an approved email or CRM provider before launch.
 
+## Mobile checks
+
+- Verified responsive viewports across 360px, 390px, 414px, and 768px.
+- Zero horizontal overflow (`document.documentElement.scrollWidth <= window.innerWidth`) on all routes, with `overflow-x: clip` applied on `html` and `body` as a safety net.
+- Sticky navigation header and top utility bar are solid white with hairline borders to eliminate background logo ghosting.
+- Mobile menu locks background scroll, closes upon link navigation, and features an accordion for all 11 product families with nested variant expansion.
+- Product variant selectors use singular labels ("Variant 1", "Variant 2", etc.) in a clean 2-column grid with min-height 44px tap targets.
+- Product specification tables scroll horizontally within their own container with sticky frozen first columns.
+- Duplicate "Request this product" buttons removed; single standardized button ("Request this product") used consistently across product and family pages.
+- Form inputs enforce 16px font-size to prevent iOS Safari auto-zooming, with full-width buttons on mobile.
+
 ## Client confirmation required
 
 - Unit 1 pin code: current company records show **334803**, while the brochure shows **343084**.

@@ -181,13 +181,20 @@ function RFQFormInner({ mode = "rfq" }: { mode?: Mode }) {
       </label>
 
       <div>
-        <button type="submit" className="btn-primary">
+        <button type="submit" className="btn-primary w-full sm:w-auto text-base font-bold min-h-[48px]">
           {dealer ? "Send dealer inquiry" : "Send RFQ"}
         </button>
         {status && (
-          <p className="mt-3 text-sm text-slate-600" role="status">
+          <div
+            className={`mt-4 rounded-lg p-4 text-sm font-semibold ${
+              status.startsWith("Thank you")
+                ? "bg-green-50 text-green-800 border border-green-200"
+                : "bg-amber-50 text-amber-800 border border-amber-200"
+            }`}
+            role="status"
+          >
             {status}
-          </p>
+          </div>
         )}
       </div>
     </form>
