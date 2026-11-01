@@ -73,10 +73,10 @@ export default async function ProductPage({
             </div>
           </div>
 
-          <div className="relative min-h-72 overflow-hidden rounded-lg bg-slate-200 shadow-card">
+          <div className="relative aspect-[4/3] sm:aspect-[16/11] min-h-72 overflow-hidden flex items-center justify-center">
             <ProductImage
-              src={product.image}
-              alt={`${product.name} coil, high-grade flexible PVC`}
+              src={product.detailImage || product.image}
+              alt={product.detailImage ? `${product.name} closeup detail view` : `${product.name} coil, high-grade flexible PVC`}
             />
           </div>
         </div>

@@ -150,7 +150,7 @@ export function FamilyVariantViewer({ family }: { family: Product }) {
         <div className="grid gap-10 lg:grid-cols-2">
           {/* Left Column: Image & Overview */}
           <div>
-            <div className="relative aspect-[16/11] overflow-hidden rounded-lg border border-slate-200 bg-slate-100 shadow-inner">
+            <div className="relative aspect-[16/11] overflow-hidden bg-white flex items-center justify-center">
               <ProductImage
                 key={activeVariant.image}
                 src={activeVariant.image}

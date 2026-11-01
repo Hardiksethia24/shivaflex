@@ -61,7 +61,7 @@ export function ProductImage({
       alt={alt}
       fill
       sizes="(max-width: 768px) 100vw, 50vw"
-      className={`object-cover ${className}`}
+      className={`object-contain mix-blend-multiply ${className}`}
       onLoad={(e) => {
         const img = e.currentTarget;
         if (img.naturalWidth === 0) {

@@ -15,6 +15,7 @@ export type Product = {
   name: string;
   applications: string[];
   image: string;
+  detailImage?: string;
   short: string;
   features: string[];
   sizes?: string;
@@ -372,6 +373,7 @@ export const products: Product[] = [
     name: "Thunder Steel Wire Hose",
     applications: ["Mining & Quarry", "Construction", "Agriculture & Irrigation"],
     image: "/images/products/thunder-steel-wire-hose.jpg",
+    detailImage: "/images/products/thunder-steel-wire-hose-closeup.jpg",
     short: "High-strength steel wire helix reinforced PVC hose for severe vacuum, pressure, and abrasive material transfer.",
     features: [
       "Embedded high-tensile spring steel wire helix guarantees zero collapse under full vacuum",

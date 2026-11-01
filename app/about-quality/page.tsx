@@ -72,7 +72,7 @@ export default function AboutQuality() {
             </p>
           </Reveal>
           <Reveal delay={0.1} className="relative">
-            <div className="relative aspect-[4/3] overflow-hidden border border-slate-200 shadow-card">
+            <div className="relative aspect-[4/3] overflow-hidden">
               <ProductImage
                 src="/images/about/team-leadership.jpg"
                 alt="Shivaflex team and leadership"
@@ -103,7 +103,7 @@ export default function AboutQuality() {
             </ul>
           </Reveal>
           <Reveal delay={0.1} className="relative">
-            <div className="relative aspect-[4/3] overflow-hidden border border-slate-200 shadow-card">
+            <div className="relative aspect-[4/3] overflow-hidden">
               <ProductImage
                 src="/images/manufacturing/extrusion-line.jpg"
                 alt="Shivaflex extrusion and braiding equipment"

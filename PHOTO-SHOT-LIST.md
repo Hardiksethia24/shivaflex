@@ -17,20 +17,20 @@ Drop photographs into `public` using these exact filenames. The matching site sl
 ### 1. Garden Pipe
 - [x] `public/images/products/garden-pipe.jpg` — family cover image (Filled from transparent garden.png)
 - [x] `public/images/products/garden-pipe-transparent.jpg` — Transparent variant (Filled from transparent garden.png)
-- [ ] `public/images/products/garden-pipe-garden-foam.jpg` — Garden Foam variant
+- [x] `public/images/products/garden-pipe-garden-foam.jpg` — Garden Foam variant (Filled from garden foam pipe.png)
 - [x] `public/images/products/garden-pipe-transparent-zebra.jpg` — Transparent Zebra variant (Filled from transparent zebra.png)
 - [x] `public/images/products/garden-pipe-shiva-gold.jpg` — Shiva Gold variant (Filled from golden garden.png)
 - [x] `public/images/products/garden-pipe-nylon.jpg` — Nylon variant (Filled from nylon garden.png)
 
 ### 2. Power Spray Hose
-- [x] `public/images/products/power-spray-hose.jpg` — single product (Filled from powerspraywithoutbox.jpg)
+- [x] `public/images/products/power-spray-hose.jpg` — single product (Filled from power spray.png)
 
 ### 3. Braided Hose
 - [x] `public/images/products/braided-hose.jpg` — family cover image (Filled from colour braided.png)
-- [x] `public/images/products/braided-hose-8mm-braided.jpg` — 8mm Braided variant (Filled from 8mmbraidedhose.jpg)
+- [x] `public/images/products/braided-hose-8mm-braided.jpg` — 8mm Braided variant (Filled from 8mm braided.png)
 - [x] `public/images/products/braided-hose-coloured-braided.jpg` — Coloured Braided variant (Filled from colour braided.png)
 - [x] `public/images/products/braided-hose-water-braided.jpg` — Water Braided variant (Filled from water .png)
-- [ ] `public/images/products/braided-hose-braided-ac-drainage.jpg` — Braided AC Drainage variant
+- [x] `public/images/products/braided-hose-braided-ac-drainage.jpg` — Braided AC Drainage variant (Filled from AC.png)
 
 ### 4. Delivery Pipe
 - [x] `public/images/products/delivery-pipe.jpg` — single product (Filled from delivery pipe.png)
@@ -42,26 +42,25 @@ Drop photographs into `public` using these exact filenames. The matching site sl
 - [x] `public/images/products/suction-pipe.jpg` — family cover image (Filled from medium duty suction.png)
 - [x] `public/images/products/suction-pipe-medium-duty.jpg` — Medium Duty variant (Filled from medium duty suction.png)
 - [x] `public/images/products/suction-pipe-heavy-duty.jpg` — Heavy Duty variant (Filled from heavy duty suction.png)
-- [x] `public/images/products/suction-pipe-type-3.jpg` — Type 3 variant (Filled from suction3.jpg)
+- [x] `public/images/products/suction-pipe-type-3.jpg` — Type 3 variant (Filled from suction type3.png)
 
 ### 7. Super Car Washing Hose
 - [x] `public/images/products/super-car-washing-hose.jpg` — family cover image (Filled from super car washing 12mm.png)
-- [x] `public/images/products/super-car-washing-hose-10mm.jpg` — 10mm size variant (Filled from supercarwashingspray10mm.jpg)
+- [x] `public/images/products/super-car-washing-hose-10mm.jpg` — 10mm size variant (Filled from super car wash 10mm.png)
 - [x] `public/images/products/super-car-washing-hose-12mm.jpg` — 12mm size variant (Filled from super car washing 12mm.png)
 
 ### 8. Thunder Steel Wire Hose
-- [x] `public/images/products/thunder-steel-wire-hose.jpg` — single product (Filled from thunder steel.png)
+- [x] `public/images/products/thunder-steel-wire-hose.jpg` — normal photo for cards & catalog (Filled from thunder steel.png)
+- [x] `public/images/products/thunder-steel-wire-hose-closeup.jpg` — closeup photo for product detail page (Filled from thundersteel closeup.png)
 
 ### 9. Duct Hose
 - [x] `public/images/products/duct-hose.jpg` — single product (Filled from duct.png)
 
 ### 10. 5 Layer Hose
-- [ ] `public/images/products/5-layer-hose.jpg` — single product
+- [x] `public/images/products/5-layer-hose.jpg` — single product (Filled from 5 layer.png)
 
 ### 11. Rock Drill Hose
-- [ ] `public/images/products/rock-drill-hose.jpg` — single product
-
-For extra product-gallery shots, use the same basename plus `-2`, `-3`, etc. For example: `public/images/products/thunder-steel-wire-hose-2.jpg`.
+- [ ] `public/images/products/rock-drill-hose.jpg` — single product (No photo in imagesFinal; showing placeholder)
 
 ## Logo
 

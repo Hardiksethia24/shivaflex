@@ -164,7 +164,7 @@ export default function Home() {
             </Link>
           </Reveal>
           <Reveal delay={0.1} className="relative">
-            <div className="relative aspect-video overflow-hidden border border-slate-200 shadow-card">
+            <div className="relative aspect-video overflow-hidden">
               <ProductImage
                 src="/images/manufacturing/plant-floor.jpg"
                 alt="Shivaflex manufacturing plant floor"

@@ -58,7 +58,7 @@ export function TiltedCarousel() {
                   x: `${delta * 68}%`,
                   rotateY: -delta * 62,
                   scale: isActive ? 1 : 0.82,
-                  opacity: isActive ? 1 : isVisible ? 0.6 : 0,
+                  opacity: isActive ? 1 : isVisible ? 0.45 : 0,
                   zIndex: isActive ? 20 : 10,
                 }}
                 transition={
@@ -73,8 +73,8 @@ export function TiltedCarousel() {
                 <button
                   type="button"
                   onClick={() => toSlide(i)}
-                  className={`aspect-[4/3] w-52 overflow-hidden rounded-xl border border-slate-200 shadow-card transition-shadow sm:w-72 md:w-80 ${
-                    isActive ? "ring-2 ring-brand/20 shadow-xl" : "hover:opacity-90"
+                  className={`aspect-[4/3] w-52 overflow-hidden transition-opacity sm:w-72 md:w-80 ${
+                    isActive ? "opacity-100" : "hover:opacity-90"
                   }`}
                   aria-label={`Show ${item.title}`}
                 >
